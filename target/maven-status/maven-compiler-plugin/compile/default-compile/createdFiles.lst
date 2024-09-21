@@ -6,4 +6,5 @@ vista\Login$1.class
 vista\Login.class
 sistemaventas\SistemaVentas.class
 modelo\Button.class
+modelo\BaseDatos.class
 modelo\PasswordField.class
