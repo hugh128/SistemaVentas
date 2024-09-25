@@ -1,7 +1,14 @@
 package vista;
 
+import conexion.UsuarioDAO;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
+
 public class Login extends javax.swing.JFrame {
 
+    private HomePage home;
+    
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -48,6 +55,11 @@ public class Login extends javax.swing.JFrame {
         txtPassword.setFocusColorEnabled(true);
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtPassword.setRadius(20);
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         btnIniciarSesion.setBackground(new java.awt.Color(241, 209, 168));
         btnIniciarSesion.setText("INICIAR SESION");
@@ -57,6 +69,11 @@ public class Login extends javax.swing.JFrame {
         btnIniciarSesion.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnIniciarSesion.setFont(new java.awt.Font("Inria Sans", 1, 24)); // NOI18N
         btnIniciarSesion.setRadius(40);
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Inria Sans", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(213, 193, 163));
@@ -116,6 +133,39 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        String nombreUsuario = txtUsuario.getText();
+        String password = String.valueOf(txtPassword.getPassword());
+        
+        if(nombreUsuario.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Completa todos los campos", "Campos Vacios", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = usuarioDAO.obtenerUsuario(nombreUsuario, password);
+        
+        if (usuario != null) {
+            JOptionPane.showMessageDialog(rootPane, "Bienvenido, " + usuario.getNombreUsuario() + "!", "Inicio de sesion exitoso", JOptionPane.INFORMATION_MESSAGE);
+            abrirVentanaPrincipal(usuario);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        txtPassword.setText("");
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        if(evt.getExtendedKeyCode() == KeyEvent.VK_ENTER) {
+            btnIniciarSesion.doClick();
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
+    public void abrirVentanaPrincipal(Usuario usuario) {
+        this.dispose();
+        home = new HomePage(usuario);
+        home.setVisible(true);
+    }
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
