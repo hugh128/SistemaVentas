@@ -3,6 +3,7 @@ modelo\Button.class
 vista\HomePage$1.class
 vista\Login$2.class
 vista\Login$3.class
+vista\HomePage$9.class
 vista\HomePage$2.class
 vista\HomePage$4.class
 modelo\PasswordField.class
@@ -16,6 +17,7 @@ sistemaventas\SistemaVentas.class
 modelo\GradientButton$1.class
 vista\HomePage$5.class
 modelo\PasswordField$1.class
+vista\HomePage$8.class
 modelo\TextField$1.class
 modelo\TextField.class
 modelo\BaseDatos.class
