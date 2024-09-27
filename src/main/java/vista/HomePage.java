@@ -1,21 +1,21 @@
 package vista;
 
+import java.awt.CardLayout;
 import modelo.Usuario;
 
 public class HomePage extends javax.swing.JFrame {
 
     private Usuario usuario;
+    private CardLayout card;
+    private Login login;
     
-    public HomePage(Usuario usuario) {    
+    public HomePage(Usuario usuario) {  
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Home Page");
         
         lbUsuario.setText(usuario.getNombreUsuario());
-        // Añadir componentes a la ventana principal
-        /*javax.swing.JLabel lblUsuario = new javax.swing.JLabel("Bienvenido, " + usuario.getNombreUsuario());
-        lblUsuario.setFont(new java.awt.Font("Inria Sans", 1, 24)); // Estilo del texto
-        add(lblUsuario); // Agrega el JLabel a la ventana*/
+        card = (CardLayout)this.panelPrincipal.getLayout();
     }
 
     @SuppressWarnings("unchecked")
@@ -35,6 +35,19 @@ public class HomePage extends javax.swing.JFrame {
         panel1 = new modelo.Panel();
         lbUsuario = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        panelPrincipal = new javax.swing.JPanel();
+        cardInicio = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        cardClientes = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        cardAlmacen = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        cardProveedores = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        cardVenta = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        cardAcercaDe = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1200, 750));
@@ -216,7 +229,7 @@ public class HomePage extends javax.swing.JFrame {
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(655, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(lbUsuario)
@@ -235,6 +248,153 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
+        panelPrincipal.setBackground(new java.awt.Color(153, 204, 255));
+        panelPrincipal.setLayout(new java.awt.CardLayout());
+
+        cardInicio.setBackground(new java.awt.Color(153, 204, 255));
+
+        jLabel3.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
+        jLabel3.setText("Inicio");
+
+        javax.swing.GroupLayout cardInicioLayout = new javax.swing.GroupLayout(cardInicio);
+        cardInicio.setLayout(cardInicioLayout);
+        cardInicioLayout.setHorizontalGroup(
+            cardInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardInicioLayout.createSequentialGroup()
+                .addContainerGap(429, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(398, 398, 398))
+        );
+        cardInicioLayout.setVerticalGroup(
+            cardInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardInicioLayout.createSequentialGroup()
+                .addGap(273, 273, 273)
+                .addComponent(jLabel3)
+                .addContainerGap(339, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(cardInicio, "inicio");
+
+        cardClientes.setBackground(new java.awt.Color(204, 255, 204));
+
+        jLabel4.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
+        jLabel4.setText("Clientes");
+
+        javax.swing.GroupLayout cardClientesLayout = new javax.swing.GroupLayout(cardClientes);
+        cardClientes.setLayout(cardClientesLayout);
+        cardClientesLayout.setHorizontalGroup(
+            cardClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardClientesLayout.createSequentialGroup()
+                .addGap(383, 383, 383)
+                .addComponent(jLabel4)
+                .addContainerGap(390, Short.MAX_VALUE))
+        );
+        cardClientesLayout.setVerticalGroup(
+            cardClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardClientesLayout.createSequentialGroup()
+                .addGap(269, 269, 269)
+                .addComponent(jLabel4)
+                .addContainerGap(343, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(cardClientes, "clientes");
+
+        cardAlmacen.setBackground(new java.awt.Color(255, 153, 153));
+
+        jLabel5.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
+        jLabel5.setText("Almacen");
+
+        javax.swing.GroupLayout cardAlmacenLayout = new javax.swing.GroupLayout(cardAlmacen);
+        cardAlmacen.setLayout(cardAlmacenLayout);
+        cardAlmacenLayout.setHorizontalGroup(
+            cardAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardAlmacenLayout.createSequentialGroup()
+                .addGap(383, 383, 383)
+                .addComponent(jLabel5)
+                .addContainerGap(378, Short.MAX_VALUE))
+        );
+        cardAlmacenLayout.setVerticalGroup(
+            cardAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardAlmacenLayout.createSequentialGroup()
+                .addGap(269, 269, 269)
+                .addComponent(jLabel5)
+                .addContainerGap(343, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(cardAlmacen, "almacen");
+
+        cardProveedores.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
+        jLabel6.setText("Proveedores");
+
+        javax.swing.GroupLayout cardProveedoresLayout = new javax.swing.GroupLayout(cardProveedores);
+        cardProveedores.setLayout(cardProveedoresLayout);
+        cardProveedoresLayout.setHorizontalGroup(
+            cardProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardProveedoresLayout.createSequentialGroup()
+                .addContainerGap(356, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(322, 322, 322))
+        );
+        cardProveedoresLayout.setVerticalGroup(
+            cardProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardProveedoresLayout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(jLabel6)
+                .addContainerGap(342, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(cardProveedores, "proveedores");
+
+        cardVenta.setBackground(new java.awt.Color(153, 255, 204));
+
+        jLabel7.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
+        jLabel7.setText("Venta");
+
+        javax.swing.GroupLayout cardVentaLayout = new javax.swing.GroupLayout(cardVenta);
+        cardVenta.setLayout(cardVentaLayout);
+        cardVentaLayout.setHorizontalGroup(
+            cardVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardVentaLayout.createSequentialGroup()
+                .addContainerGap(418, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(402, 402, 402))
+        );
+        cardVentaLayout.setVerticalGroup(
+            cardVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardVentaLayout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(jLabel7)
+                .addContainerGap(342, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(cardVenta, "venta");
+
+        cardAcercaDe.setBackground(new java.awt.Color(255, 204, 255));
+
+        jLabel8.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
+        jLabel8.setText("Acerca de");
+
+        javax.swing.GroupLayout cardAcercaDeLayout = new javax.swing.GroupLayout(cardAcercaDe);
+        cardAcercaDe.setLayout(cardAcercaDeLayout);
+        cardAcercaDeLayout.setHorizontalGroup(
+            cardAcercaDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardAcercaDeLayout.createSequentialGroup()
+                .addContainerGap(390, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(351, 351, 351))
+        );
+        cardAcercaDeLayout.setVerticalGroup(
+            cardAcercaDeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardAcercaDeLayout.createSequentialGroup()
+                .addGap(269, 269, 269)
+                .addComponent(jLabel8)
+                .addContainerGap(343, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(cardAcercaDe, "acercaDe");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -242,16 +402,23 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 750));
@@ -261,51 +428,45 @@ public class HomePage extends javax.swing.JFrame {
 
     private void btnAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcercaDeActionPerformed
         actualizarBotones(btnAcercaDe);
+        card.show(panelPrincipal, "acercaDe");
     }//GEN-LAST:event_btnAcercaDeActionPerformed
 
     private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
         actualizarBotones(btnVenta);
+        card.show(panelPrincipal, "venta");
     }//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlmacenActionPerformed
         actualizarBotones(btnAlmacen);
+        card.show(panelPrincipal, "almacen");
     }//GEN-LAST:event_btnAlmacenActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         actualizarBotones(btnClientes);
+        card.show(panelPrincipal, "clientes");
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
         actualizarBotones(btnProveedores);
+        card.show(panelPrincipal, "proveedores");
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
         actualizarBotones(btnInicio);
+        card.show(panelPrincipal, "inicio");
     }//GEN-LAST:event_btnInicioActionPerformed
 
-    public static void main(String args[]) {
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HomePage().setVisible(true);
-            }
-        });*/
-        
-        // Supongamos que tienes un usuario para pasar al constructor
-        Usuario usuario = new Usuario(); // Crear una instancia de Usuario
-        usuario.setNombreUsuario("NombreDelUsuario"); // Establece un nombre de usuario para la prueba
+    public static void main(String args[]) {       
+        Usuario usuario = new Usuario();
+        usuario.setNombreUsuario("Nombre Usuario");
         
         java.awt.EventQueue.invokeLater(() -> {
             new HomePage(usuario).setVisible(true);
         });
-    
-    /*public static void iniciar(Usuario usuario) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new HomePage(usuario).setVisible(true);
-        });*/
     }
     
     private void actualizarBotones(modelo.GradientButton botonActivado) {
@@ -339,11 +500,24 @@ public class HomePage extends javax.swing.JFrame {
     private modelo.GradientButton btnProveedores;
     private modelo.Button btnSalir;
     private modelo.GradientButton btnVenta;
+    private javax.swing.JPanel cardAcercaDe;
+    private javax.swing.JPanel cardAlmacen;
+    private javax.swing.JPanel cardClientes;
+    private javax.swing.JPanel cardInicio;
+    private javax.swing.JPanel cardProveedores;
+    private javax.swing.JPanel cardVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbUsuario;
     private modelo.Panel panel1;
+    private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
