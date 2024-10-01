@@ -2,12 +2,23 @@ package vista;
 
 import java.awt.CardLayout;
 import modelo.Usuario;
+import conexion.ProveedorDAO;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import modelo.Proveedor;
+import modelo.CheckBoxRenderer;
+import modelo.CheckBoxEditor;
+
 
 public class HomePage extends javax.swing.JFrame {
 
     private Usuario usuario;
     private CardLayout card;
     private Login login;
+    private ProveedorDAO proveedorDAO = new ProveedorDAO();
+    DefaultTableModel modelo;
     
     public HomePage(Usuario usuario) {  
         initComponents();
@@ -16,6 +27,12 @@ public class HomePage extends javax.swing.JFrame {
         
         lbUsuario.setText(usuario.getNombreUsuario());
         card = (CardLayout)this.panelPrincipal.getLayout();
+        
+        configurarTablaProveedores();
+        tbProveedores.getColumnModel().getColumn(0).setMaxWidth(35);
+        tbProveedores.getColumnModel().getColumn(1).setMaxWidth(100);
+        tbProveedores.getColumnModel().getColumn(4).setMaxWidth(120);
+        tbProveedores.getColumnModel().getColumn(6).setMaxWidth(80);
     }
 
     @SuppressWarnings("unchecked")
@@ -52,7 +69,15 @@ public class HomePage extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnAgregarProducto = new modelo.Button();
         cardProveedores = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        btnEditarProveedor = new modelo.Button();
+        panel4 = new modelo.Panel();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbProveedores = new javax.swing.JTable();
+        btnAgregarProveedor = new modelo.Button();
+        btnEliminarProveedor = new modelo.Button();
         cardVenta = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cardAcercaDe = new javax.swing.JPanel();
@@ -319,6 +344,23 @@ public class HomePage extends javax.swing.JFrame {
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jTable1.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(40);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(40);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(80);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(80);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(80);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(4).setMaxWidth(80);
+            jTable1.getColumnModel().getColumn(5).setMinWidth(185);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(185);
+            jTable1.getColumnModel().getColumn(5).setMaxWidth(185);
+            jTable1.getColumnModel().getColumn(5).setHeaderValue("Email");
+            jTable1.getColumnModel().getColumn(6).setHeaderValue("Title 7");
+        }
 
         panel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 80, 850, 430));
 
@@ -351,12 +393,102 @@ public class HomePage extends javax.swing.JFrame {
 
         panelPrincipal.add(cardInventario, "inventario");
 
-        cardProveedores.setBackground(new java.awt.Color(204, 255, 255));
+        cardProveedores.setBackground(new java.awt.Color(248, 248, 248));
         cardProveedores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
-        jLabel6.setText("Proveedores");
-        cardProveedores.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 270, -1, -1));
+        jLabel12.setFont(new java.awt.Font("Inria Sans", 1, 24)); // NOI18N
+        jLabel12.setText("Proveedores");
+        cardProveedores.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 33, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
+        jLabel13.setText("Dasboard / Proveedores");
+        cardProveedores.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 66, -1, -1));
+
+        btnEditarProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eva--edit-2-outline.png"))); // NOI18N
+        btnEditarProveedor.setText("Editar");
+        btnEditarProveedor.setColor(new java.awt.Color(79, 166, 243));
+        btnEditarProveedor.setColorOver(new java.awt.Color(39, 144, 249));
+        btnEditarProveedor.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditarProveedor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnEditarProveedor.setHoverEnabled(true);
+        btnEditarProveedor.setRadius(10);
+        btnEditarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarProveedorActionPerformed(evt);
+            }
+        });
+        cardProveedores.add(btnEditarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 125, 40));
+
+        panel4.setBackground(new java.awt.Color(255, 255, 255));
+        panel4.setRoundBottomLeft(20);
+        panel4.setRoundBottomRight(20);
+        panel4.setRoundTopLeft(20);
+        panel4.setRoundTopRight(20);
+        panel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(128, 128, 128));
+        jLabel14.setText("Mostrando 1 de 10 registros");
+        panel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, -1, -1));
+
+        tbProveedores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "NIT", "Nombre", "Direccion", "Telefono", "Email", "Acciones"
+            }
+        ));
+        tbProveedores.setFocusable(false);
+        tbProveedores.setGridColor(new java.awt.Color(255, 255, 255));
+        tbProveedores.setOpaque(false);
+        tbProveedores.setRowHeight(25);
+        tbProveedores.setSelectionBackground(new java.awt.Color(233, 233, 233));
+        tbProveedores.setShowGrid(false);
+        tbProveedores.setShowVerticalLines(false);
+        tbProveedores.getTableHeader().setResizingAllowed(false);
+        tbProveedores.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tbProveedores);
+
+        panel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 30, 850, 480));
+
+        cardProveedores.add(panel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 110, 895, 550));
+
+        btnAgregarProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/upload-outline.png"))); // NOI18N
+        btnAgregarProveedor.setText("Agregar Proveedor");
+        btnAgregarProveedor.setColor(new java.awt.Color(243, 156, 79));
+        btnAgregarProveedor.setColorOver(new java.awt.Color(228, 115, 16));
+        btnAgregarProveedor.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAgregarProveedor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAgregarProveedor.setHoverEnabled(true);
+        btnAgregarProveedor.setRadius(10);
+        btnAgregarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProveedorActionPerformed(evt);
+            }
+        });
+        cardProveedores.add(btnAgregarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 175, 40));
+
+        btnEliminarProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete-outline.png"))); // NOI18N
+        btnEliminarProveedor.setText("Eliminar");
+        btnEliminarProveedor.setColor(new java.awt.Color(243, 79, 84));
+        btnEliminarProveedor.setColorOver(new java.awt.Color(222, 79, 84));
+        btnEliminarProveedor.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEliminarProveedor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnEliminarProveedor.setHoverEnabled(true);
+        btnEliminarProveedor.setRadius(10);
+        btnEliminarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProveedorActionPerformed(evt);
+            }
+        });
+        cardProveedores.add(btnEliminarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(765, 40, 125, 40));
 
         panelPrincipal.add(cardProveedores, "proveedores");
 
@@ -434,6 +566,8 @@ public class HomePage extends javax.swing.JFrame {
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
         actualizarBotones(btnProveedores);
         card.show(panelPrincipal, "proveedores");
+        limpiarTabla();
+        mostrarProveedores();
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
@@ -446,8 +580,75 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
+
+    private void btnEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProveedorActionPerformed
+        
+        
+        int filaSeleccionada = tbProveedores.getSelectedRow();
+    
+        if (filaSeleccionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un proveedor para editar.");
+            return;
+        }
+
+        int idProveedor = (int) tbProveedores.getValueAt(filaSeleccionada, 0);
+        int nit = (int) tbProveedores.getValueAt(filaSeleccionada, 1);
+        String nombre = (String) tbProveedores.getValueAt(filaSeleccionada, 2);
+        String direccion = (String) tbProveedores.getValueAt(filaSeleccionada, 3);
+        String telefono = (String) tbProveedores.getValueAt(filaSeleccionada, 4);
+        String email = (String) tbProveedores.getValueAt(filaSeleccionada, 5);
+
+        Proveedor proveedor = new Proveedor(idProveedor, nit, nombre, direccion, telefono, email);
+
+        EditarProveedor dialog = new EditarProveedor(this, true, proveedor);
+        dialog.setVisible(true);
+        limpiarTabla();
+        mostrarProveedores();
+        
+        
+    }//GEN-LAST:event_btnEditarProveedorActionPerformed
+
+    private void btnAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProveedorActionPerformed
+        AgregarProveedor agregarProveedor = new AgregarProveedor(this, true);
+        agregarProveedor.setVisible(true);
+        limpiarTabla();
+        mostrarProveedores();
+    }//GEN-LAST:event_btnAgregarProveedorActionPerformed
+
+    private void btnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProveedorActionPerformed
+        int filaSeleccionada = tbProveedores.getSelectedRow();
+
+        if (filaSeleccionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un proveedor para eliminar.");
+            return;
+        }
+
+        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar este proveedor?", "Confirmar eliminación", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirmacion == javax.swing.JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        int idProveedor = (int) tbProveedores.getValueAt(filaSeleccionada, 0);
+        int nit = (int) tbProveedores.getValueAt(filaSeleccionada, 1);
+        String nombre = (String) tbProveedores.getValueAt(filaSeleccionada, 2);
+        String direccion = (String) tbProveedores.getValueAt(filaSeleccionada, 3);
+        String telefono = (String) tbProveedores.getValueAt(filaSeleccionada, 4);
+        String email = (String) tbProveedores.getValueAt(filaSeleccionada, 5);
+
+        Proveedor proveedor = new Proveedor(idProveedor, nit, nombre, direccion, telefono, email);
+
+        boolean eliminado = proveedorDAO.eliminarProveedor(proveedor);
+
+        if (eliminado) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Proveedor eliminado con éxito.");
+            limpiarTabla();
+            mostrarProveedores();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el proveedor.");
+        }
+    }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
     public static void main(String args[]) {       
         Usuario usuario = new Usuario();
@@ -481,11 +682,85 @@ public class HomePage extends javax.swing.JFrame {
         botonActivado.setHoverEnabled(false);
     }
 
+    public void mostrarProveedores() {
+        List<Proveedor> Proveedores = proveedorDAO.obtenerProveedores();
+        modelo = (DefaultTableModel) tbProveedores.getModel();
+        Object[] ob = new Object[7];
+        for (Proveedor proveedor : Proveedores) {
+            ob[0] = proveedor.getIdProveedor();
+            ob[1] = proveedor.getNit();
+            ob[2] = proveedor.getNombre();
+            ob[3] = proveedor.getDireccion();
+            ob[4] = proveedor.getTelefono();
+            ob[5] = proveedor.getEmail();
+            ob[6] = false;
+            modelo.addRow(ob);
+        }
+    }
+    
+    public void limpiarTabla() {
+        modelo.setRowCount(0);
+    }
+    
+    private void configurarTablaProveedores() {
+        tbProveedores.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tbProveedores.getTableHeader().setOpaque(false);
+        tbProveedores.getTableHeader().setBackground(new Color(32, 136, 203));
+        tbProveedores.getTableHeader().setForeground(new Color(255, 255, 255));
+        tbProveedores.setRowHeight(25);
+        
+        modelo = new DefaultTableModel(new Object[]{"ID", "NIT", "Nombre", "Dirección", "Teléfono", "Email", "Seleccion"}, 0) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 6) {
+                    return Boolean.class;
+                }
+                return super.getColumnClass(columnIndex);
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 6;
+            }
+        };
+        tbProveedores.setModel(modelo);
+
+        tbProveedores.getColumnModel().getColumn(6).setCellRenderer(new CheckBoxRenderer());
+        tbProveedores.getColumnModel().getColumn(6).setCellEditor(new CheckBoxEditor(tbProveedores));
+        
+        // Selecciona checkbox al selecionar una fila
+        tbProveedores.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) {
+                int selectedRow = tbProveedores.getSelectedRow();
+                if (selectedRow >= 0) {
+                    boolean currentValue = (Boolean) tbProveedores.getValueAt(selectedRow, 6);
+                    tbProveedores.setValueAt(!currentValue, selectedRow, 6);
+
+                    for (int i = 0; i < modelo.getRowCount(); i++) {
+                        if (i != selectedRow) {
+                            modelo.setValueAt(false, i, 6);
+                        }
+                    }
+                    
+                    if (tbProveedores.getCellEditor() != null) {
+                        tbProveedores.getCellEditor().stopCellEditing();
+                    }
+                }
+            }
+        });
+        
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private modelo.GradientButton btnAcercaDe;
     private modelo.Button btnAgregarProducto;
+    private modelo.Button btnAgregarProveedor;
     private modelo.Button btnBuscarProducto;
     private modelo.GradientButton btnClientes;
+    private modelo.Button btnEditarProveedor;
+    private modelo.Button btnEliminarProveedor;
     private modelo.Button btnFiltroProducto;
     private modelo.GradientButton btnInicio;
     private modelo.GradientButton btnInventario;
@@ -501,21 +776,26 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbUsuario;
     private modelo.Panel panel1;
     private modelo.Panel panel3;
+    private modelo.Panel panel4;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JTable tbProveedores;
     private modelo.TextField txtBuscarProducto;
     // End of variables declaration//GEN-END:variables
 }
