@@ -1,15 +1,25 @@
 package vista;
 
+import conexion.ProductoDAO;
 import java.awt.CardLayout;
 import modelo.Usuario;
 import conexion.ProveedorDAO;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Proveedor;
 import modelo.CheckBoxRenderer;
 import modelo.CheckBoxEditor;
+import modelo.Producto;
+import table.EventAction;
+import table.ScrollBar;
+import table.StatusType;
+import table.TableActionCellEditor;
+import table.TableActionEvent;
 
 
 public class HomePage extends javax.swing.JFrame {
@@ -18,7 +28,8 @@ public class HomePage extends javax.swing.JFrame {
     private CardLayout card;
     private Login login;
     private ProveedorDAO proveedorDAO = new ProveedorDAO();
-    DefaultTableModel modelo;
+    private ProductoDAO productoDAO = new ProductoDAO();
+    private DefaultTableModel modelo;
     
     public HomePage(Usuario usuario) {  
         initComponents();
@@ -33,6 +44,43 @@ public class HomePage extends javax.swing.JFrame {
         tbProveedores.getColumnModel().getColumn(1).setMaxWidth(100);
         tbProveedores.getColumnModel().getColumn(4).setMaxWidth(120);
         tbProveedores.getColumnModel().getColumn(6).setMaxWidth(80);
+        
+        
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                System.out.println("Edit row : " + row);
+                Producto producto = obtenerProductoDesdeFila(row);
+                EditarProducto editarProducto = new EditarProducto(null, true, producto);
+                editarProducto.setVisible(true);
+                System.out.println("Producto editado: " + producto.getNombre());
+                
+                mostrarProductos();
+            }
+
+            @Override
+            public void onDelete(int row) {
+                System.out.println("Delete row : " + row);
+                Producto producto = obtenerProductoDesdeFila(row);
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el producto: " + producto.getNombre() + "?", "Eliminar Producto", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    productoDAO.eliminarProducto(producto);
+                    System.out.println("Producto eliminado: " + producto.getNombre());
+
+                    mostrarProductos();
+                }
+                
+            }
+        };
+        
+        spTable.setVerticalScrollBar(new ScrollBar());
+        spTable.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTable.getViewport().setBackground(Color.WHITE);
+        JPanel p = new JPanel();
+        p.setBackground(Color.WHITE);
+        spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        tablaInventario.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -59,12 +107,10 @@ public class HomePage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         cardInventario = new javax.swing.JPanel();
         panel3 = new modelo.Panel();
-        btnBuscarProducto = new modelo.Button();
-        btnFiltroProducto = new modelo.Button();
-        txtBuscarProducto = new modelo.TextField();
-        jLabel11 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        myTextField1 = new modelo.MyTextField();
+        myButton1 = new modelo.MyButton();
+        spTable = new javax.swing.JScrollPane();
+        tablaInventario = new table.Table();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnAgregarProducto = new modelo.Button();
@@ -286,85 +332,47 @@ public class HomePage extends javax.swing.JFrame {
         cardInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panel3.setBackground(new java.awt.Color(255, 255, 255));
-        panel3.setRoundBottomLeft(20);
-        panel3.setRoundBottomRight(20);
         panel3.setRoundTopLeft(20);
-        panel3.setRoundTopRight(20);
         panel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBuscarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconamoon--search-fill.png"))); // NOI18N
-        btnBuscarProducto.setBorderColor(new java.awt.Color(225, 227, 229));
-        btnBuscarProducto.setBorderEnabled(true);
-        btnBuscarProducto.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarProducto.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        btnBuscarProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnBuscarProducto.setRadius(10);
-        btnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarProductoActionPerformed(evt);
-            }
-        });
-        panel3.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 50, 35));
+        myTextField1.setForeground(new java.awt.Color(128, 128, 128));
+        myTextField1.setText("Buscar un producto");
+        myTextField1.setBorderColor(new java.awt.Color(128, 128, 128));
+        myTextField1.setBorderEnabled(true);
+        myTextField1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        myTextField1.setRadius(10);
+        panel3.add(myTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 22, 300, 35));
 
-        btnFiltroProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rivet-icons--filter-solid.png"))); // NOI18N
-        btnFiltroProducto.setText(" filtro");
-        btnFiltroProducto.setBorderColor(new java.awt.Color(225, 227, 229));
-        btnFiltroProducto.setBorderEnabled(true);
-        btnFiltroProducto.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnFiltroProducto.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        btnFiltroProducto.setRadius(10);
-        panel3.add(btnFiltroProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(775, 20, 100, 35));
+        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fe--search (2).png"))); // NOI18N
+        myButton1.setBorderColor(new java.awt.Color(128, 128, 128));
+        myButton1.setBorderEnabled(true);
+        myButton1.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myButton1.setRadius(10);
+        panel3.add(myButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 22, 50, 35));
 
-        txtBuscarProducto.setForeground(new java.awt.Color(144, 147, 149));
-        txtBuscarProducto.setText("Busca un producto aqui");
-        txtBuscarProducto.setBorderColor(new java.awt.Color(225, 227, 229));
-        txtBuscarProducto.setBorderColorOnFocus(new java.awt.Color(0, 153, 255));
-        txtBuscarProducto.setBorderEnabled(true);
-        txtBuscarProducto.setFocusColorEnabled(true);
-        txtBuscarProducto.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        txtBuscarProducto.setRadius(10);
-        panel3.add(txtBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 20, 250, 35));
+        spTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
-        jLabel11.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(128, 128, 128));
-        jLabel11.setText("Mostrando 1 de 10 registros");
-        panel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+                "ID", "Nombre", "Marca", "Precio", "Cantidad", "Categoria", "Acciones"
             }
-        ));
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(40);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(5).setMinWidth(185);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(185);
-            jTable1.getColumnModel().getColumn(5).setMaxWidth(185);
-            jTable1.getColumnModel().getColumn(5).setHeaderValue("Email");
-            jTable1.getColumnModel().getColumn(6).setHeaderValue("Title 7");
-        }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
+            };
 
-        panel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 80, 850, 430));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        spTable.setViewportView(tablaInventario);
 
-        cardInventario.add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 110, 895, 550));
+        panel3.add(spTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 910, 480));
+
+        cardInventario.add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 945, 575));
 
         jLabel5.setFont(new java.awt.Font("Inria Sans", 1, 24)); // NOI18N
         jLabel5.setText("Inventario");
@@ -447,7 +455,6 @@ public class HomePage extends javax.swing.JFrame {
         tbProveedores.setRowHeight(25);
         tbProveedores.setSelectionBackground(new java.awt.Color(233, 233, 233));
         tbProveedores.setShowGrid(false);
-        tbProveedores.setShowVerticalLines(false);
         tbProveedores.getTableHeader().setResizingAllowed(false);
         tbProveedores.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tbProveedores);
@@ -552,6 +559,7 @@ public class HomePage extends javax.swing.JFrame {
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         actualizarBotones(btnInventario);
         card.show(panelPrincipal, "inventario");
+        mostrarProductos();
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -576,12 +584,10 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
-        // TODO add your handling code here:
+        AgregarProducto agregarProducto = new AgregarProducto(this, true);
+        agregarProducto.setVisible(true);
+        mostrarProductos();
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
-
-    private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-
-    }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
     private void btnEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProveedorActionPerformed
         
@@ -682,6 +688,51 @@ public class HomePage extends javax.swing.JFrame {
         botonActivado.setHoverEnabled(false);
     }
 
+    // Productos
+    public void mostrarProductos() {
+        tablaInventario.clearTable();
+        List<Producto> Productos = productoDAO.obtenerProductos();
+        for (Producto producto : Productos) {
+                String categoria = producto.getCategoria();
+                StatusType estado;
+                if (esCategoriaValida(categoria)) {
+                    estado = StatusType.valueOf(categoria.toUpperCase());
+                } else {
+                    estado = StatusType.UNKNOWN;
+                }
+            
+            tablaInventario.addRow(new Object[]{
+                producto.getIdProducto(),
+                producto.getNombre(),
+                producto.getMarca(),  
+                producto.getPrecio(),          
+                producto.getCantidad(),
+                estado
+            });
+        }
+    }
+    
+    private boolean esCategoriaValida(String categoria) {
+        for (StatusType status : StatusType.values()) {
+            if (status.name().equalsIgnoreCase(categoria)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Producto obtenerProductoDesdeFila(int row) {
+        int idProducto = Integer.parseInt(tablaInventario.getValueAt(row, 0).toString());
+        String nombre = tablaInventario.getValueAt(row, 1).toString();
+        String marca = tablaInventario.getValueAt(row, 2).toString();
+        String categoria = tablaInventario.getValueAt(row, 5).toString();
+        float precio = Float.parseFloat(tablaInventario.getValueAt(row, 3).toString());
+        int cantidad = Integer.parseInt(tablaInventario.getValueAt(row, 4).toString());
+
+        return new Producto(idProducto, nombre, marca, categoria, precio, cantidad);
+    }
+
+
     public void mostrarProveedores() {
         List<Proveedor> Proveedores = proveedorDAO.obtenerProveedores();
         modelo = (DefaultTableModel) tbProveedores.getModel();
@@ -757,11 +808,9 @@ public class HomePage extends javax.swing.JFrame {
     private modelo.GradientButton btnAcercaDe;
     private modelo.Button btnAgregarProducto;
     private modelo.Button btnAgregarProveedor;
-    private modelo.Button btnBuscarProducto;
     private modelo.GradientButton btnClientes;
     private modelo.Button btnEditarProveedor;
     private modelo.Button btnEliminarProveedor;
-    private modelo.Button btnFiltroProducto;
     private modelo.GradientButton btnInicio;
     private modelo.GradientButton btnInventario;
     private modelo.GradientButton btnProveedores;
@@ -775,7 +824,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel cardVenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -787,15 +835,16 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbUsuario;
+    private modelo.MyButton myButton1;
+    private modelo.MyTextField myTextField1;
     private modelo.Panel panel1;
     private modelo.Panel panel3;
     private modelo.Panel panel4;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JScrollPane spTable;
+    private table.Table tablaInventario;
     private javax.swing.JTable tbProveedores;
-    private modelo.TextField txtBuscarProducto;
     // End of variables declaration//GEN-END:variables
 }
