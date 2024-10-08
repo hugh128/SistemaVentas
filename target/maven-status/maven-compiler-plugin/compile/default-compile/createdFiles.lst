@@ -1,5 +1,7 @@
+table\TablaUsuarios.class
 modelo\Panel.class
 table\Action.class
+vista\HomePage$15.class
 modelo\Button$1.class
 table\ModernScrollBarUI.class
 modelo\MyTextField$1.class
@@ -28,6 +30,7 @@ vista\Login$2.class
 vista\EditarProducto$1.class
 vista\AgregarProducto$5$1.class
 vista\AgregarProducto$5.class
+table\TablaUsuarios$2.class
 vista\Login.class
 sistemaventas\SistemaVentas.class
 table\ModernScrollBarUI$InvisibleScrollBarButton.class
@@ -44,6 +47,7 @@ vista\EditarProducto.class
 vista\EditarProducto$5.class
 vista\Login$1.class
 modelo\Producto.class
+table\TablaUsuarios$1.class
 vista\AgregarProducto.class
 modelo\BaseDatos.class
 vista\AgregarProducto$4.class
