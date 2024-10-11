@@ -20,6 +20,10 @@ import table.ScrollBar;
 import table.StatusType;
 import table.TableActionCellEditor;
 import table.TableActionEvent;
+import conexion.ClienteDAO;
+import javax.swing.ImageIcon;
+import modelo.Cliente;
+import modelo.CardHome;
 
 
 public class HomePage extends javax.swing.JFrame {
@@ -29,12 +33,19 @@ public class HomePage extends javax.swing.JFrame {
     private Login login;
     private ProveedorDAO proveedorDAO = new ProveedorDAO();
     private ProductoDAO productoDAO = new ProductoDAO();
+    private ClienteDAO clienteDAO = new ClienteDAO();
     private DefaultTableModel modelo;
     
     public HomePage(Usuario usuario) {  
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Home Page");
+        
+        card1.setData(new CardHome(new ImageIcon(getClass().getResource("/images/coins.png")), "Stock Total", "+300", "Aumentó un 60%"));
+        card2.setData(new CardHome(new ImageIcon(getClass().getResource("/images/chart-histogram.png")), "Total de Ganancias", "Q.15000", "Aumentó un 15%"));
+        card3.setData(new CardHome(new ImageIcon(getClass().getResource("/images/users-alt.png")), "Nuevos Clientes", "+20", "Aumentó un 70%"));
+        
+        
         
         lbUsuario.setText(usuario.getNombreUsuario());
         card = (CardLayout)this.panelPrincipal.getLayout();
@@ -73,6 +84,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         };
         
+               
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
         spTable.getViewport().setBackground(Color.WHITE);
@@ -87,6 +99,11 @@ public class HomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        proveedor1 = new modelo.Proveedor();
+        panel5 = new modelo.Panel();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbProveedores1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         panel1 = new modelo.Panel();
         lbUsuario = new javax.swing.JLabel();
@@ -102,9 +119,20 @@ public class HomePage extends javax.swing.JFrame {
         btnAcercaDe = new modelo.GradientButton();
         panelPrincipal = new javax.swing.JPanel();
         cardInicio = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        panelCard = new javax.swing.JLayeredPane();
+        card1 = new component.Card();
+        card2 = new component.Card();
+        card3 = new component.Card();
+        panel7 = new modelo.Panel();
+        chart2 = new chartModel.Chart();
         cardClientes = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        panel6 = new modelo.Panel();
+        txtFiltroClientes = new modelo.MyTextField();
+        myButton2 = new modelo.MyButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        clienteTabla = new modelo.ClienteTabla();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         cardInventario = new javax.swing.JPanel();
         panel3 = new modelo.Panel();
         myTextField1 = new modelo.MyTextField();
@@ -128,6 +156,39 @@ public class HomePage extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cardAcercaDe = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        chart1 = new chartModel.Chart();
+
+        panel5.setBackground(new java.awt.Color(255, 255, 255));
+        panel5.setRoundBottomLeft(20);
+        panel5.setRoundBottomRight(20);
+        panel5.setRoundTopLeft(20);
+        panel5.setRoundTopRight(20);
+        panel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(128, 128, 128));
+        jLabel15.setText("Mostrando 1 de 10 registros");
+        panel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, -1, -1));
+
+        tbProveedores1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "NIT", "Nombre", "Direccion", "Telefono", "Email", "Acciones"
+            }
+        ));
+        tbProveedores1.setFocusable(false);
+        tbProveedores1.setGridColor(new java.awt.Color(255, 255, 255));
+        tbProveedores1.setOpaque(false);
+        tbProveedores1.setRowHeight(25);
+        tbProveedores1.setSelectionBackground(new java.awt.Color(233, 233, 233));
+        tbProveedores1.setShowGrid(false);
+        tbProveedores1.getTableHeader().setResizingAllowed(false);
+        tbProveedores1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tbProveedores1);
+
+        panel5.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 30, 850, 480));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1200, 750));
@@ -310,21 +371,123 @@ public class HomePage extends javax.swing.JFrame {
         panelPrincipal.setBackground(new java.awt.Color(153, 204, 255));
         panelPrincipal.setLayout(new java.awt.CardLayout());
 
-        cardInicio.setBackground(new java.awt.Color(153, 204, 255));
+        cardInicio.setBackground(new java.awt.Color(248, 248, 248));
         cardInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
-        jLabel3.setText("Inicio");
-        cardInicio.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(429, 273, -1, -1));
+        panelCard.setBackground(new java.awt.Color(255, 255, 255));
+        panelCard.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+
+        card1.setColor1(new java.awt.Color(32, 40, 78));
+        card1.setColor2(new java.awt.Color(72, 154, 208));
+        panelCard.add(card1);
+
+        card2.setColor1(new java.awt.Color(29, 78, 92));
+        card2.setColor2(new java.awt.Color(66, 153, 122));
+        panelCard.add(card2);
+
+        card3.setColor1(new java.awt.Color(112, 128, 144));
+        card3.setColor2(new java.awt.Color(0, 0, 0));
+        panelCard.add(card3);
+
+        cardInicio.add(panelCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 170));
+
+        panel7.setBackground(new java.awt.Color(248, 248, 248));
+        panel7.setRoundBottomLeft(30);
+        panel7.setRoundBottomRight(30);
+        panel7.setRoundTopLeft(30);
+        panel7.setRoundTopRight(30);
+
+        chart2.setBackground(new java.awt.Color(248, 248, 248));
+        chart2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+
+        javax.swing.GroupLayout panel7Layout = new javax.swing.GroupLayout(panel7);
+        panel7.setLayout(panel7Layout);
+        panel7Layout.setHorizontalGroup(
+            panel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chart2, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panel7Layout.setVerticalGroup(
+            panel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chart2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        cardInicio.add(panel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 940, 480));
 
         panelPrincipal.add(cardInicio, "inicio");
 
-        cardClientes.setBackground(new java.awt.Color(204, 255, 204));
+        cardClientes.setBackground(new java.awt.Color(248, 248, 248));
+        cardClientes.setForeground(new java.awt.Color(204, 204, 204));
+        cardClientes.setToolTipText("");
         cardClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
-        jLabel4.setText("Clientes");
-        cardClientes.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 269, -1, -1));
+        panel6.setBackground(new java.awt.Color(255, 255, 255));
+        panel6.setRoundBottomLeft(20);
+        panel6.setRoundBottomRight(20);
+        panel6.setRoundTopLeft(20);
+        panel6.setRoundTopRight(20);
+        panel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtFiltroClientes.setForeground(new java.awt.Color(128, 128, 128));
+        txtFiltroClientes.setText("Buscar un cliente");
+        txtFiltroClientes.setBorderColor(new java.awt.Color(128, 128, 128));
+        txtFiltroClientes.setBorderEnabled(true);
+        txtFiltroClientes.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        txtFiltroClientes.setRadius(10);
+        txtFiltroClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFiltroClientesActionPerformed(evt);
+            }
+        });
+        panel6.add(txtFiltroClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 300, 35));
+
+        myButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fe--search (2).png"))); // NOI18N
+        myButton2.setBorderColor(new java.awt.Color(128, 128, 128));
+        myButton2.setBorderEnabled(true);
+        myButton2.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        myButton2.setRadius(10);
+        panel6.add(myButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 50, 35));
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+
+        clienteTabla.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        clienteTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Cliente", "Nombre", "DPI", "NIT", "Número", "Dirección"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(clienteTabla);
+        if (clienteTabla.getColumnModel().getColumnCount() > 0) {
+            clienteTabla.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        panel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 56, 900, 470));
+
+        cardClientes.add(panel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 940, 600));
+
+        jLabel6.setFont(new java.awt.Font("Inria Sans", 1, 24)); // NOI18N
+        jLabel6.setText("Clientes");
+        cardClientes.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
+        jLabel11.setText("Dasboard / Clientes");
+        cardClientes.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         panelPrincipal.add(cardClientes, "clientes");
 
@@ -526,7 +689,8 @@ public class HomePage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,7 +701,9 @@ public class HomePage extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)))
                 .addGap(262, 262, 262))
         );
 
@@ -569,6 +735,7 @@ public class HomePage extends javax.swing.JFrame {
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         actualizarBotones(btnClientes);
         card.show(panelPrincipal, "clientes");
+        mostrarClientes();
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
@@ -656,6 +823,10 @@ public class HomePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarProveedorActionPerformed
 
+    private void txtFiltroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFiltroClientesActionPerformed
+
     public static void main(String args[]) {       
         Usuario usuario = new Usuario();
         usuario.setNombreUsuario("Nombre Usuario");
@@ -731,7 +902,7 @@ public class HomePage extends javax.swing.JFrame {
 
         return new Producto(idProducto, nombre, marca, categoria, precio, cantidad);
     }
-
+    
 
     public void mostrarProveedores() {
         List<Proveedor> Proveedores = proveedorDAO.obtenerProveedores();
@@ -753,6 +924,41 @@ public class HomePage extends javax.swing.JFrame {
         modelo.setRowCount(0);
     }
     
+    // Clientes
+    public void mostrarClientes() {
+     clienteTabla.clearTable(); // Limpia la tabla antes de agregar datos
+        List<Cliente> clientes = clienteDAO.obtenerClientes(); // Obtiene la lista de clientes desde el DAO
+    
+    for (Cliente cliente : clientes) {
+        clienteTabla.addRow(new Object[]{
+            cliente.getIdCliente(),    // ID del Cliente
+            cliente.getNombre(),       // Nombre del Cliente
+            cliente.getDpi(),          // DPI del Cliente
+            cliente.getNit(),          // NIT del Cliente
+            cliente.getNumero(),       // Número de Teléfono
+            cliente.getDireccion()     // Dirección del Cliente
+        });
+    }
+}
+
+// Método para obtener un cliente desde la fila seleccionada
+    public Cliente obtenerClienteDesdeFila(int row) {
+    int idCliente = Integer.parseInt(clienteTabla.getValueAt(row, 0).toString());
+    String nombre = clienteTabla.getValueAt(row, 1).toString();
+    String dpi = clienteTabla.getValueAt(row, 2).toString();
+    String nit = clienteTabla.getValueAt(row, 3).toString();
+    String numero = clienteTabla.getValueAt(row, 4).toString();
+    String direccion = clienteTabla.getValueAt(row, 5).toString();
+    
+    return new Cliente(idCliente, nombre, dpi, nit, numero, direccion);
+}
+
+// Método para limpiar la tabla
+    public void limpiarTablaClientes() {
+    modelo.setRowCount(0); // Asume que modelo es el DefaultTableModel de clienteTabla
+}
+    
+
     private void configurarTablaProveedores() {
         tbProveedores.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tbProveedores.getTableHeader().setOpaque(false);
@@ -816,35 +1022,52 @@ public class HomePage extends javax.swing.JFrame {
     private modelo.GradientButton btnProveedores;
     private modelo.Button btnSalir;
     private modelo.GradientButton btnVenta;
+    private component.Card card1;
+    private component.Card card2;
+    private component.Card card3;
     private javax.swing.JPanel cardAcercaDe;
     private javax.swing.JPanel cardClientes;
     private javax.swing.JPanel cardInicio;
     private javax.swing.JPanel cardInventario;
     private javax.swing.JPanel cardProveedores;
     private javax.swing.JPanel cardVenta;
+    private chartModel.Chart chart1;
+    private chartModel.Chart chart2;
+    private modelo.ClienteTabla clienteTabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbUsuario;
     private modelo.MyButton myButton1;
+    private modelo.MyButton myButton2;
     private modelo.MyTextField myTextField1;
     private modelo.Panel panel1;
     private modelo.Panel panel3;
     private modelo.Panel panel4;
+    private modelo.Panel panel5;
+    private modelo.Panel panel6;
+    private modelo.Panel panel7;
+    private javax.swing.JLayeredPane panelCard;
     private javax.swing.JPanel panelPrincipal;
+    private modelo.Proveedor proveedor1;
     private javax.swing.JScrollPane spTable;
     private table.Table tablaInventario;
     private javax.swing.JTable tbProveedores;
+    private javax.swing.JTable tbProveedores1;
+    private modelo.MyTextField txtFiltroClientes;
     // End of variables declaration//GEN-END:variables
 }
