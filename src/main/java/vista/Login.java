@@ -145,7 +145,7 @@ public class Login extends javax.swing.JFrame {
         Usuario usuario = usuarioDAO.obtenerUsuario(nombreUsuario, password);
         
         if (usuario != null) {
-            JOptionPane.showMessageDialog(rootPane, "Bienvenido, " + usuario.getNombreUsuario() + "!", "Inicio de sesion exitoso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Bienvenido, " + usuario.getNombre()+ "!", "Inicio de sesion exitoso", JOptionPane.INFORMATION_MESSAGE);
             abrirVentanaPrincipal(usuario);
         } else {
             JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos", "Error", JOptionPane.WARNING_MESSAGE);

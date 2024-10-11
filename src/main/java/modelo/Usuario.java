@@ -1,19 +1,25 @@
 package modelo;
 
+import java.util.Date;
+
 public class Usuario {
     private int idUsuario;
-    private String nombreUsuario;
+    private String usuario;
+    private String nombre;
     private String password;
     private String tipoUsuario;
+    private Date fechaCreacion;
     
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String password, String tipoUsuario) {
+    public Usuario(int idUsuario, String usuario, String nombre, String password, String tipoUsuario, Date fechaCreacion) {
         this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
+        this.usuario = usuario;
+        this.nombre = nombre;
         this.password = password;
         this.tipoUsuario = tipoUsuario;
+        this.fechaCreacion = fechaCreacion;
     }
 
     public int getIdUsuario() {
@@ -24,12 +30,20 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getPassword() {
@@ -46,6 +60,14 @@ public class Usuario {
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
     
 }

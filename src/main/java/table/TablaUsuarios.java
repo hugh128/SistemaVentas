@@ -19,7 +19,7 @@ public class TablaUsuarios extends JTable {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 TableHeader header = new TableHeader(value + "");
-                if(column == 5 || column == 6) {
+                if(column == 2 || column == 3 || column == 4) {
                     header.setHorizontalAlignment(JLabel.CENTER);
                 }
                 return header;
@@ -28,16 +28,16 @@ public class TablaUsuarios extends JTable {
         setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                if(value instanceof StatusType) {
-                    StatusType type = (StatusType)value;
-                    CellStatus cell = new CellStatus(type);
+                if(value instanceof UserType) {
+                    UserType type = (UserType)value;
+                    CellTypeUser cell = new CellTypeUser(type);
                     return cell;
-                } else if(column == 6) {
+                } else if(column == 4) {
                     Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                     Action action = new Action();
                     action.setBackground(com.getBackground());
                     return action;
-                }else {
+                } else {
                     Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                     com.setBackground(Color.WHITE);
                     setBorder(noFocusBorder);
@@ -46,12 +46,17 @@ public class TablaUsuarios extends JTable {
                     } else {
                         com.setForeground(new Color(102, 102, 102));
                     }
+                    
+                    if (column == 3) {
+                        setHorizontalAlignment(JLabel.CENTER);
+                    } else {
+                        setHorizontalAlignment(JLabel.LEFT);
+                    }
+                                        
                     return com;
                 }
             }
-            
         });
-        
     }
     
     public void addRow(Object[] row) {

@@ -4,8 +4,10 @@ import conexion.ProductoDAO;
 import java.awt.CardLayout;
 import modelo.Usuario;
 import conexion.ProveedorDAO;
+import conexion.UsuarioDAO;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,11 +17,13 @@ import modelo.Proveedor;
 import modelo.CheckBoxRenderer;
 import modelo.CheckBoxEditor;
 import modelo.Producto;
-import table.EventAction;
 import table.ScrollBar;
 import table.StatusType;
+import table.UserType;
 import table.TableActionCellEditor;
+import table.TableActionCellEditorUser;
 import table.TableActionEvent;
+import table.TableActionEventUser;
 
 
 public class HomePage extends javax.swing.JFrame {
@@ -29,16 +33,18 @@ public class HomePage extends javax.swing.JFrame {
     private Login login;
     private ProveedorDAO proveedorDAO = new ProveedorDAO();
     private ProductoDAO productoDAO = new ProductoDAO();
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
     private DefaultTableModel modelo;
     
     public HomePage(Usuario usuario) {
         this.usuario = usuario;
+        int idUsuarioActual = usuario.getIdUsuario();
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Home Page");
         verificarLogin(usuario);
         
-        lbUsuario.setText(usuario.getNombreUsuario());
+        lbUsuario.setText(usuario.getNombre());
         card = (CardLayout)this.panelPrincipal.getLayout();
         
         configurarTablaProveedores();
@@ -82,6 +88,45 @@ public class HomePage extends javax.swing.JFrame {
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         tablaInventario.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
+        
+        // Tabla de Usuarios
+        TableActionEventUser eventUser = new TableActionEventUser() {
+            @Override
+            public void onEditUser(int row) {
+                System.out.println("Edit row : " + row);
+                Usuario usuarioAEditar = obtenerUsuarioPorFila(row);
+                EditarUsuario editarUsuario = new EditarUsuario(null, true, usuarioAEditar);
+                editarUsuario.setVisible(true);
+                System.out.println("Usuario editado: " + usuario.getNombre());             
+                mostrarUsuarios();
+            }
+
+            @Override
+            public void onDeleteUser(int row) {
+                System.out.println("Delete row : " + row);
+                Usuario usuarioAEliminar = obtenerUsuarioPorFila(row);
+                if (usuarioAEliminar.getIdUsuario() == idUsuarioActual) {
+                    JOptionPane.showMessageDialog(null, "No puedes eliminar tu propio usuario.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }          
+                
+                int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el usuario: ?", "Eliminar usuario", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    usuarioDAO.eliminarUsuario(usuarioAEliminar);
+                    System.out.println("Usuario eliminado: " + usuarioAEliminar.getNombre());
+                    mostrarUsuarios();
+                }
+                
+            }
+        };
+        
+        spTablaUsuarios.setVerticalScrollBar(new ScrollBar());
+        spTablaUsuarios.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTablaUsuarios.getViewport().setBackground(Color.WHITE); // Color fondo de tabla
+        p.setBackground(Color.WHITE);
+        spTablaUsuarios.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        tbUsuarios.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditorUser(eventUser));
+        
         
     }
 
@@ -579,10 +624,21 @@ public class HomePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Usuario", "Tipo", "Fecha Agreado", "Acciones"
+                "Nombre", "Usuario", "Tipo Usuario", "Fecha Agreado", "Acciones"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         spTablaUsuarios.setViewportView(tbUsuarios);
+        if (tbUsuarios.getColumnModel().getColumnCount() > 0) {
+            tbUsuarios.getColumnModel().getColumn(0).setPreferredWidth(150);
+        }
 
         jPanel2.add(spTablaUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 870, 440));
 
@@ -595,6 +651,11 @@ public class HomePage extends javax.swing.JFrame {
         btnNuevoUsuario.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         btnNuevoUsuario.setHoverEnabled(true);
         btnNuevoUsuario.setRadius(20);
+        btnNuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoUsuarioActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnNuevoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 135, 190, 45));
 
         javax.swing.GroupLayout cardUsuariosLayout = new javax.swing.GroupLayout(cardUsuarios);
@@ -748,12 +809,20 @@ public class HomePage extends javax.swing.JFrame {
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         actualizarBotones(btnUsuarios);
         card.show(panelPrincipal, "usuarios");
+        mostrarUsuarios();
     }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoUsuarioActionPerformed
+        AgregarUsuario agregarUsuario = new AgregarUsuario(this, true);
+        agregarUsuario.setVisible(true);
+        mostrarUsuarios();
+    }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
 
     public static void main(String args[]) {       
         Usuario usuario = new Usuario();
-        usuario.setNombreUsuario("Nombre Usuario");
-        usuario.setTipoUsuario("administrador");
+        usuario.setIdUsuario(0);
+        usuario.setNombre("Nombre Usuario");
+        usuario.setTipoUsuario("Administrador");
         
         java.awt.EventQueue.invokeLater(() -> {
             new HomePage(usuario).setVisible(true);
@@ -829,8 +898,8 @@ public class HomePage extends javax.swing.JFrame {
 
         return new Producto(idProducto, nombre, marca, categoria, precio, cantidad);
     }
-
-
+    
+    // Proveedores
     public void mostrarProveedores() {
         List<Proveedor> Proveedores = proveedorDAO.obtenerProveedores();
         modelo = (DefaultTableModel) tbProveedores.getModel();
@@ -900,12 +969,39 @@ public class HomePage extends javax.swing.JFrame {
         
     }
     
+    // Usuarios
+    private List<Usuario> listaUsuarios = new ArrayList<>();
+    public void mostrarUsuarios() {
+        tbUsuarios.clearTable();
+        listaUsuarios.clear();
+        List<Usuario> Usuarios = usuarioDAO.obtenerUsuarios();
+        for (Usuario usuario : Usuarios) {
+            UserType tipo = UserType.valueOf(usuario.getTipoUsuario());
+            tbUsuarios.addRow(new Object[]{
+                usuario.getNombre(),
+                usuario.getUsuario(),
+                tipo,
+                usuario.getFechaCreacion()
+            });
+            listaUsuarios.add(usuario);
+        }
+        int totalRegistros = listaUsuarios.size();
+        lbTotalUsuarios.setText(String.valueOf(totalRegistros));
+    }
     
+    public Usuario obtenerUsuarioPorFila(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < listaUsuarios.size()) {
+            return listaUsuarios.get(rowIndex);
+        }
+        return null;
+    }
+    
+    // Login
     public void verificarLogin(Usuario usuario) {
         String rolUsuario = usuario.getTipoUsuario();
-        System.out.println(rolUsuario);
+        //System.out.println(rolUsuario);
 
-        if (rolUsuario.equals("administrador")) {
+        if (rolUsuario.equals("Administrador")) {
             btnUsuarios.setVisible(true);
         } else {
             btnUsuarios.setVisible(false);
