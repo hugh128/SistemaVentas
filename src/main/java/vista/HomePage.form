@@ -48,10 +48,7 @@
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="panelPrincipal" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="panelPrincipal" max="32767" attributes="0"/>
                       <Component id="panel1" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -482,7 +479,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="0" width="940" height="170"/>
+                      <AbsoluteConstraints x="10" y="0" width="930" height="170"/>
                     </Constraint>
                   </Constraints>
 
@@ -536,7 +533,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="190" width="940" height="480"/>
+                      <AbsoluteConstraints x="0" y="190" width="950" height="490"/>
                     </Constraint>
                   </Constraints>
 
@@ -545,7 +542,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="chart2" pref="928" max="32767" attributes="0"/>
+                              <Component id="chart2" pref="938" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -554,7 +551,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="chart2" pref="468" max="32767" attributes="0"/>
+                              <Component id="chart2" pref="478" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>

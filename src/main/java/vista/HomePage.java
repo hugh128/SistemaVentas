@@ -53,6 +53,7 @@ public class HomePage extends javax.swing.JFrame {
         card1.setData(new CardHome(new ImageIcon(getClass().getResource("/images/coins.png")), "Stock Total", "+300", "Aumentó un 60%"));
         card2.setData(new CardHome(new ImageIcon(getClass().getResource("/images/chart-histogram.png")), "Total de Ganancias", "Q.15000", "Aumentó un 15%"));
         card3.setData(new CardHome(new ImageIcon(getClass().getResource("/images/users-alt.png")), "Nuevos Clientes", "+20", "Aumentó un 70%"));
+        
         card = (CardLayout)this.panelPrincipal.getLayout();
         
         configurarTablaProveedores();
@@ -428,7 +429,7 @@ public class HomePage extends javax.swing.JFrame {
         card3.setColor2(new java.awt.Color(0, 0, 0));
         panelCard.add(card3);
 
-        cardInicio.add(panelCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 170));
+        cardInicio.add(panelCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 930, 170));
 
         panel7.setBackground(new java.awt.Color(248, 248, 248));
         panel7.setRoundBottomLeft(30);
@@ -445,18 +446,18 @@ public class HomePage extends javax.swing.JFrame {
             panel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart2, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+                .addComponent(chart2, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panel7Layout.setVerticalGroup(
             panel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addComponent(chart2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        cardInicio.add(panel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 940, 480));
+        cardInicio.add(panel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 950, 490));
 
         panelPrincipal.add(cardInicio, "inicio");
 
@@ -801,9 +802,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(

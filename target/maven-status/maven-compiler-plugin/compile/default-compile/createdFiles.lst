@@ -7,7 +7,6 @@ table\TableStatus$1.class
 conexion\ClienteDAO.class
 table\TableType$1.class
 table\TablaUsuarios.class
-modelo\CustomComboBox$1.class
 modelo\Panel.class
 vista\EditarUsuario.class
 table\Action.class
@@ -65,7 +64,6 @@ vista\AgregarProducto$5$1.class
 vista\AgregarProducto$5.class
 table\TablaUsuarios$2.class
 chartModel\LegendItem.class
-modelo\CustomComboBox$1$1.class
 vista\Login.class
 sistemaventas\SistemaVentas.class
 table\TableActionEventUser.class
@@ -94,7 +92,6 @@ modelo\Combobox.class
 chart\blankchart\BlankPlotChart.class
 modelo\ClienteTabla$1.class
 modelo\ClienteTabla.class
-modelo\CustomComboBox.class
 modelo\Combobox$ComboUI$ArrowButton.class
 modelo\Cliente.class
 table\UserType.class
