@@ -143,11 +143,6 @@ public class HomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        proveedor1 = new modelo.Proveedor();
-        panel5 = new modelo.Panel();
-        jLabel18 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tbProveedores1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         panel1 = new modelo.Panel();
         lbUsuario = new javax.swing.JLabel();
@@ -210,39 +205,6 @@ public class HomePage extends javax.swing.JFrame {
         spTablaUsuarios = new javax.swing.JScrollPane();
         tbUsuarios = new table.TablaUsuarios();
         btnNuevoUsuario = new modelo.MyButton();
-        chart1 = new chartModel.Chart();
-
-        panel5.setBackground(new java.awt.Color(255, 255, 255));
-        panel5.setRoundBottomLeft(20);
-        panel5.setRoundBottomRight(20);
-        panel5.setRoundTopLeft(20);
-        panel5.setRoundTopRight(20);
-        panel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel18.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(128, 128, 128));
-        jLabel18.setText("Mostrando 1 de 10 registros");
-        panel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, -1, -1));
-
-        tbProveedores1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "NIT", "Nombre", "Direccion", "Telefono", "Email", "Acciones"
-            }
-        ));
-        tbProveedores1.setFocusable(false);
-        tbProveedores1.setGridColor(new java.awt.Color(255, 255, 255));
-        tbProveedores1.setOpaque(false);
-        tbProveedores1.setRowHeight(25);
-        tbProveedores1.setSelectionBackground(new java.awt.Color(233, 233, 233));
-        tbProveedores1.setShowGrid(false);
-        tbProveedores1.getTableHeader().setResizingAllowed(false);
-        tbProveedores1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(tbProveedores1);
-
-        panel5.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 30, 850, 480));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1200, 750));
@@ -438,7 +400,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(btnVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -612,7 +574,7 @@ public class HomePage extends javax.swing.JFrame {
 
         panel3.add(spTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 910, 480));
 
-        cardInventario.add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 950, 575));
+        cardInventario.add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 950, 580));
 
         jLabel5.setFont(new java.awt.Font("Inria Sans", 1, 24)); // NOI18N
         jLabel5.setText("Inventario");
@@ -826,7 +788,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         cardUsuariosLayout.setVerticalGroup(
             cardUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
         );
 
         panelPrincipal.add(cardUsuarios, "usuarios");
@@ -839,9 +801,10 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -851,11 +814,9 @@ public class HomePage extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)))
-                .addGap(262, 262, 262))
+                        .addGap(0, 0, 0)
+                        .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(0, 0, 0))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 750));
@@ -1240,7 +1201,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel cardProveedores;
     private javax.swing.JPanel cardUsuarios;
     private javax.swing.JPanel cardVenta;
-    private chartModel.Chart chart1;
     private chartModel.Chart chart2;
     private modelo.ClienteTabla clienteTabla;
     private javax.swing.JLabel jLabel1;
@@ -1252,7 +1212,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1263,7 +1222,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbTotalUsuarios;
     private javax.swing.JLabel lbUsuario;
     private modelo.MyButton myButton1;
@@ -1272,17 +1230,14 @@ public class HomePage extends javax.swing.JFrame {
     private modelo.Panel panel1;
     private modelo.Panel panel3;
     private modelo.Panel panel4;
-    private modelo.Panel panel5;
     private modelo.Panel panel6;
     private modelo.Panel panel7;
     private javax.swing.JLayeredPane panelCard;
     private javax.swing.JPanel panelPrincipal;
-    private modelo.Proveedor proveedor1;
     private javax.swing.JScrollPane spTablaUsuarios;
     private javax.swing.JScrollPane spTable;
     private table.Table tablaInventario;
     private javax.swing.JTable tbProveedores;
-    private javax.swing.JTable tbProveedores1;
     private table.TablaUsuarios tbUsuarios;
     private modelo.MyTextField txtFiltroClientes;
     // End of variables declaration//GEN-END:variables
