@@ -196,6 +196,13 @@ public class HomePage extends javax.swing.JFrame {
         cardVenta = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cardAcercaDe = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         cardUsuarios = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -711,12 +718,41 @@ public class HomePage extends javax.swing.JFrame {
 
         panelPrincipal.add(cardVenta, "venta");
 
-        cardAcercaDe.setBackground(new java.awt.Color(255, 204, 255));
+        cardAcercaDe.setBackground(new java.awt.Color(5, 12, 30));
         cardAcercaDe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/61a7d9f46cf1bd257b5a150962f9ffef.png"))); // NOI18N
+        cardAcercaDe.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DEV1.png"))); // NOI18N
+        cardAcercaDe.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 260, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Inria Sans", 0, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Version 1.0");
+        cardAcercaDe.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 420, -1, -1));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DEV2.png"))); // NOI18N
+        cardAcercaDe.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Inria Sans", 0, 20)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("insomnio y con demasiada cafeína");
+        cardAcercaDe.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 540, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Inria Sans", 0, 20)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Este proyecto se creo en varias noches de");
+        cardAcercaDe.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Inria Sans", 0, 20)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("¡Y ve cómo ha crecido!");
+        cardAcercaDe.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(385, 570, -1, -1));
+
         jLabel8.setFont(new java.awt.Font("Inria Sans", 1, 48)); // NOI18N
-        jLabel8.setText("Acerca de");
-        cardAcercaDe.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 269, -1, -1));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Acerca de 2 (2).png"))); // NOI18N
+        cardAcercaDe.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 830, -1));
 
         panelPrincipal.add(cardAcercaDe, "acercaDe");
 
@@ -1211,6 +1247,13 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
