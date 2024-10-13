@@ -15,8 +15,6 @@ C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\conexion\UsuarioD
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\BaseDatos.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Button.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\CardHome.java
-C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\CheckBoxEditor.java
-C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\CheckBoxRenderer.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Cliente.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\ClienteTabla.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Combobox.java
@@ -29,11 +27,11 @@ C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Panel.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\PasswordField.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Producto.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Proveedor.java
-C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\ProveedorTabla.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\TextField.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Usuario.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\sistemaventas\SistemaVentas.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\Action.java
+C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\ActionProveedor.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\ActionUser.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\CellStatus.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\CellTypeUser.java
@@ -41,11 +39,14 @@ C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\EventAction
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\ModernScrollBarUI.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\ScrollBar.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\StatusType.java
+C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TablaProveedores.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TablaUsuarios.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\Table.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableActionCellEditor.java
+C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableActionCellEditorProveedor.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableActionCellEditorUser.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableActionEvent.java
+C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableActionEventProveedor.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableActionEventUser.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableHeader.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableStatus.java

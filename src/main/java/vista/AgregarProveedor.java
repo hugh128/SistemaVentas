@@ -157,7 +157,7 @@ public class AgregarProveedor extends javax.swing.JDialog {
             return;
         }
         
-        int nit = Integer.parseInt(txtNit.getText());
+        long nit = Long.parseLong(txtNit.getText());
         String nombre = txtNombre.getText();
         String direccion = txtDireccion.getText();
         String telefono = txtTelefono.getText();
