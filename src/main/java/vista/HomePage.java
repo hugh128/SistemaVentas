@@ -127,19 +127,31 @@ public class HomePage extends javax.swing.JFrame {
                 
                 mostrarProductos();
             }
-
+            
             @Override
             public void onDelete(int row) {
-                System.out.println("Delete row : " + row);
-                Producto producto = obtenerProductoDesdeFila(row);
-                int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el producto: " + producto.getNombre() + "?", "Eliminar Producto", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
-                    productoDAO.eliminarProducto(producto);
-                    System.out.println("Producto eliminado: " + producto.getNombre());
+                if (row >= 0 && row < tablaInventario.getRowCount()) {
+                    System.out.println("Delete row : " + row);
 
-                    mostrarProductos();
+                    if (tablaInventario.isEditing()) {
+                        tablaInventario.getCellEditor().stopCellEditing();
+                    }
+                    
+                    Producto producto = obtenerProductoDesdeFila(row);
+                    int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el producto: " + producto.getNombre() + "?", "Eliminar Producto", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        productoDAO.eliminarProducto(producto);
+                        System.out.println("Producto eliminado: " + producto.getNombre());
+
+                        DefaultTableModel model = (DefaultTableModel) tablaInventario.getModel();
+                        model.removeRow(row);
+                        int totalRegistros = model.getRowCount();
+                        lbTotalProductos.setText(String.valueOf(totalRegistros));
+                        model.fireTableDataChanged();
+                    }
+                } else {
+                    System.out.println("Indice de fila no valido: " + row);
                 }
-                
             }
         };
         
@@ -162,23 +174,35 @@ public class HomePage extends javax.swing.JFrame {
                 System.out.println("Usuario editado: " + usuario.getNombre());             
                 mostrarUsuarios();
             }
-
+            
             @Override
             public void onDeleteUser(int row) {
-                System.out.println("Delete row : " + row);
-                Usuario usuarioAEliminar = obtenerUsuarioPorFila(row);
-                if (usuarioAEliminar.getIdUsuario() == idUsuarioActual) {
-                    JOptionPane.showMessageDialog(null, "No puedes eliminar tu propio usuario.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }          
-                
-                int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el usuario: ?", "Eliminar usuario", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
-                    usuarioDAO.eliminarUsuario(usuarioAEliminar);
-                    System.out.println("Usuario eliminado: " + usuarioAEliminar.getNombre());
-                    mostrarUsuarios();
+                if (row >= 0 && row < tbUsuarios.getRowCount()) {
+                    System.out.println("Delete row : " + row);
+
+                    if (tbUsuarios.isEditing()) {
+                        tbUsuarios.getCellEditor().stopCellEditing();
+                    }
+                    
+                    Usuario usuarioAEliminar = obtenerUsuarioPorFila(row);
+                    if (usuarioAEliminar.getIdUsuario() == idUsuarioActual) {
+                        JOptionPane.showMessageDialog(null, "No puedes eliminar tu propio usuario.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    } 
+                    int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el usuario: " + usuarioAEliminar.getUsuario() + "?", "Eliminar usuario", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        usuarioDAO.eliminarUsuario(usuarioAEliminar);
+                        System.out.println("Usuario eliminado: " + usuarioAEliminar.getNombre());
+
+                        DefaultTableModel model = (DefaultTableModel) tbUsuarios.getModel();
+                        model.removeRow(row);
+                        int totalRegistros = model.getRowCount();
+                        lbTotalUsuarios.setText(String.valueOf(totalRegistros));
+                        model.fireTableDataChanged();
+                    }
+                } else {
+                    System.out.println("Indice de fila no valido: " + row);
                 }
-                
             }
         };
         
@@ -238,6 +262,8 @@ public class HomePage extends javax.swing.JFrame {
         myButton1 = new modelo.MyButton();
         spTable = new javax.swing.JScrollPane();
         tablaInventario = new table.Table();
+        lbTotalProductos = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnAgregarProducto = new modelo.Button();
@@ -685,6 +711,15 @@ public class HomePage extends javax.swing.JFrame {
         spTable.setViewportView(tablaInventario);
 
         panel3.add(spTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 910, 480));
+
+        lbTotalProductos.setFont(new java.awt.Font("Inria Sans", 1, 24)); // NOI18N
+        lbTotalProductos.setForeground(new java.awt.Color(128, 128, 130));
+        lbTotalProductos.setText("0");
+        panel3.add(lbTotalProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
+
+        jLabel31.setFont(new java.awt.Font("Inria Sans", 1, 20)); // NOI18N
+        jLabel31.setText("Total de productos");
+        panel3.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 20, -1, -1));
 
         cardInventario.add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 950, 580));
 
@@ -1436,6 +1471,8 @@ public class HomePage extends javax.swing.JFrame {
                 estado
             });
         }
+        int totalRegistros = Productos.size();
+        lbTotalProductos.setText(String.valueOf(totalRegistros));
     }
     
     private boolean esCategoriaValida(String categoria) {
@@ -1700,6 +1737,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1737,6 +1775,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel lbSubTotal;
     private javax.swing.JLabel lbTelCliente;
     private javax.swing.JLabel lbTelEmpresa;
+    private javax.swing.JLabel lbTotalProductos;
     private javax.swing.JLabel lbTotalProveedores;
     private javax.swing.JLabel lbTotalUsuarios;
     private javax.swing.JLabel lbTotalVenta;

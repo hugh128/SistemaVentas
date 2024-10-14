@@ -34,7 +34,7 @@ public class TablaUsuarios extends JTable {
                     return cell;
                 } else if(column == 4) {
                     Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                    Action action = new Action();
+                    ActionUser action = new ActionUser();
                     action.setBackground(com.getBackground());
                     return action;
                 } else {
