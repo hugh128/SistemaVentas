@@ -341,18 +341,20 @@ public class HomePage extends javax.swing.JFrame {
         tbProveedores = new table.TablaProveedores();
         cardVenta = new javax.swing.JPanel();
         panel2 = new modelo.Panel();
-        cbProductos = new modelo.Combobox();
         spTablaVentas = new javax.swing.JScrollPane();
         tbVentas = new table.TablaVentas();
-        btnBorrarVenta = new modelo.MyButton();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        lbPrecio = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        lbStock = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        txtCantidadVenta = new modelo.MyTextField();
-        btnAgregarVenta = new modelo.MyButton();
+        panel5 = new modelo.Panel();
+        lbNombreEmpresa2 = new javax.swing.JLabel();
+        cbClientes = new modelo.Combobox();
+        jLabel23 = new javax.swing.JLabel();
+        lbCliente = new javax.swing.JLabel();
+        lbNitCliente = new javax.swing.JLabel();
+        lbDireccionCliente = new javax.swing.JLabel();
+        lbTelCliente = new javax.swing.JLabel();
+        lbDpiCliente = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         lbTelEmpresa = new javax.swing.JLabel();
         lbDireccionEmpresa = new javax.swing.JLabel();
         panel4 = new modelo.Panel();
@@ -373,18 +375,17 @@ public class HomePage extends javax.swing.JFrame {
         lbNombreEmpresa11 = new javax.swing.JLabel();
         lbNitEmpresa2 = new javax.swing.JLabel();
         lbNoFactura = new javax.swing.JLabel();
-        panel5 = new modelo.Panel();
-        lbNombreEmpresa2 = new javax.swing.JLabel();
-        cbClientes = new modelo.Combobox();
-        jLabel23 = new javax.swing.JLabel();
-        lbCliente = new javax.swing.JLabel();
-        lbNitCliente = new javax.swing.JLabel();
-        lbDireccionCliente = new javax.swing.JLabel();
-        lbTelCliente = new javax.swing.JLabel();
-        lbDpiCliente = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        panel8 = new modelo.Panel();
+        jLabel28 = new javax.swing.JLabel();
+        cbProductos = new modelo.Combobox();
+        jLabel29 = new javax.swing.JLabel();
+        lbStock = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        lbPrecio = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        txtCantidadVenta = new modelo.MyTextField();
+        btnAgregarVenta = new modelo.MyButton();
+        btnBorrarVenta = new modelo.MyButton();
         lbNombreEmpresa = new javax.swing.JLabel();
         lbNitEmpresa = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
@@ -920,9 +921,6 @@ public class HomePage extends javax.swing.JFrame {
         panel2.setRoundTopRight(10);
         panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cbProductos.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        panel2.add(cbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 310, 30));
-
         spTablaVentas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
         tbVentas.setModel(new javax.swing.table.DefaultTableModel(
@@ -946,85 +944,60 @@ public class HomePage extends javax.swing.JFrame {
             tbVentas.getColumnModel().getColumn(0).setMaxWidth(40);
         }
 
-        panel2.add(spTablaVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 570, 340));
+        panel2.add(spTablaVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 570, 370));
 
-        btnBorrarVenta.setForeground(new java.awt.Color(184, 34, 47));
-        btnBorrarVenta.setText("Borrar");
-        btnBorrarVenta.setBorderColor(new java.awt.Color(184, 34, 47));
-        btnBorrarVenta.setBorderEnabled(true);
-        btnBorrarVenta.setColor(new java.awt.Color(252, 240, 241));
-        btnBorrarVenta.setColorOver(new java.awt.Color(246, 207, 211));
-        btnBorrarVenta.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBorrarVenta.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        btnBorrarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnBorrarVenta.setHoverEnabled(true);
-        btnBorrarVenta.setRadius(20);
-        btnBorrarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrarVentaActionPerformed(evt);
-            }
-        });
-        panel2.add(btnBorrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 150, 35));
+        cardVenta.add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 581, 410));
 
-        jLabel26.setFont(new java.awt.Font("Inria Sans", 1, 16)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(45, 113, 248));
-        jLabel26.setText("Cantidad");
-        panel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, -1));
+        panel5.setBackground(new java.awt.Color(255, 255, 255));
+        panel5.setRoundBottomLeft(10);
+        panel5.setRoundBottomRight(10);
+        panel5.setRoundTopLeft(10);
+        panel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel27.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        jLabel27.setText("Precio Q.");
-        panel2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, -1, -1));
+        lbNombreEmpresa2.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        lbNombreEmpresa2.setText("Direccion:");
+        panel5.add(lbNombreEmpresa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
-        lbPrecio.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        lbPrecio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbPrecio.setText("0.00");
-        panel2.add(lbPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 90, 70, -1));
+        cbClientes.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        panel5.add(cbClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 280, -1));
 
-        jLabel29.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        jLabel29.setText("Stock");
-        panel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        jLabel23.setFont(new java.awt.Font("Inria Sans", 1, 22)); // NOI18N
+        jLabel23.setText("Datos del cliente");
+        panel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
 
-        lbStock.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
-        lbStock.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbStock.setText("0");
-        panel2.add(lbStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 50, -1));
+        lbCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        lbCliente.setText("Nombre Cliente");
+        panel5.add(lbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
-        jLabel28.setFont(new java.awt.Font("Inria Sans", 1, 16)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(45, 113, 248));
-        jLabel28.setText("Elegir Productos");
-        panel2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 15, -1, -1));
+        lbNitCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        lbNitCliente.setText("00000001");
+        panel5.add(lbNitCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, -1));
 
-        txtCantidadVenta.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtCantidadVenta.setBorderEnabled(true);
-        txtCantidadVenta.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        txtCantidadVenta.setRadius(10);
-        txtCantidadVenta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCantidadVentaKeyTyped(evt);
-            }
-        });
-        panel2.add(txtCantidadVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 150, 30));
+        lbDireccionCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        lbDireccionCliente.setText("-----");
+        panel5.add(lbDireccionCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        btnAgregarVenta.setForeground(new java.awt.Color(29, 131, 112));
-        btnAgregarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carbon--add-filled.png"))); // NOI18N
-        btnAgregarVenta.setText("Agregar    ");
-        btnAgregarVenta.setBorderColor(new java.awt.Color(28, 130, 111));
-        btnAgregarVenta.setBorderEnabled(true);
-        btnAgregarVenta.setColor(new java.awt.Color(242, 252, 250));
-        btnAgregarVenta.setColorOver(new java.awt.Color(194, 241, 232));
-        btnAgregarVenta.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAgregarVenta.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        btnAgregarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnAgregarVenta.setHoverEnabled(true);
-        btnAgregarVenta.setRadius(20);
-        btnAgregarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarVentaActionPerformed(evt);
-            }
-        });
-        panel2.add(btnAgregarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 150, 35));
+        lbTelCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        lbTelCliente.setText("00000001");
+        panel5.add(lbTelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
 
-        cardVenta.add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 581, 530));
+        lbDpiCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        lbDpiCliente.setText("000000000001");
+        panel5.add(lbDpiCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        jLabel7.setText("DPI:");
+        panel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        jLabel14.setText("Nit:");
+        panel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        jLabel25.setText("Telefono:");
+        panel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, -1, -1));
+
+        cardVenta.add(panel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 580, 250));
 
         lbTelEmpresa.setFont(new java.awt.Font("Inria Sans", 0, 18)); // NOI18N
         lbTelEmpresa.setText("Tel: 7737-4893");
@@ -1052,7 +1025,7 @@ public class HomePage extends javax.swing.JFrame {
                 btnRealizarVentaActionPerformed(evt);
             }
         });
-        panel4.add(btnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 605, 352, 65));
+        panel4.add(btnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 615, 352, 65));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1129,58 +1102,95 @@ public class HomePage extends javax.swing.JFrame {
         lbNoFactura.setText("1");
         jPanel5.add(lbNoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 50, -1));
 
-        panel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 355, 350, 250));
+        panel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 350, 250));
 
-        panel5.setBackground(new java.awt.Color(255, 255, 255));
-        panel5.setRoundTopLeft(10);
-        panel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel8.setBackground(new java.awt.Color(255, 255, 255));
+        panel8.setRoundTopLeft(10);
+        panel8.setRoundTopRight(10);
+        panel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbNombreEmpresa2.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        lbNombreEmpresa2.setText("Direccion:");
-        panel5.add(lbNombreEmpresa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        jLabel28.setFont(new java.awt.Font("Inria Sans", 1, 22)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(45, 113, 248));
+        jLabel28.setText("Elegir Productos");
+        panel8.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
 
-        cbClientes.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        panel5.add(cbClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 280, -1));
+        cbProductos.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
+        panel8.add(cbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 290, 30));
 
-        jLabel23.setFont(new java.awt.Font("Inria Sans", 1, 22)); // NOI18N
-        jLabel23.setText("Datos del cliente");
-        panel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+        jLabel29.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        jLabel29.setText("Stock Disponible:");
+        panel8.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
-        lbCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        lbCliente.setText("Nombre Cliente");
-        panel5.add(lbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        lbStock.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        lbStock.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbStock.setText("0");
+        panel8.add(lbStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 50, -1));
 
-        lbNitCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        lbNitCliente.setText("00000001");
-        panel5.add(lbNitCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        jLabel27.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        jLabel27.setText("Precio Q.");
+        panel8.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, -1, -1));
 
-        lbDireccionCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        lbDireccionCliente.setText("-----");
-        panel5.add(lbDireccionCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        lbPrecio.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        lbPrecio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbPrecio.setText("0.00");
+        panel8.add(lbPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 70, -1));
 
-        lbTelCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        lbTelCliente.setText("00000001");
-        panel5.add(lbTelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, -1, -1));
+        jLabel26.setFont(new java.awt.Font("Inria Sans", 1, 16)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(45, 113, 248));
+        jLabel26.setText("Cantidad:");
+        panel8.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
 
-        lbDpiCliente.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        lbDpiCliente.setText("000000000001");
-        panel5.add(lbDpiCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
+        txtCantidadVenta.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtCantidadVenta.setBorderEnabled(true);
+        txtCantidadVenta.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
+        txtCantidadVenta.setRadius(10);
+        txtCantidadVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadVentaKeyTyped(evt);
+            }
+        });
+        panel8.add(txtCantidadVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 130, 30));
 
-        jLabel7.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        jLabel7.setText("DPI:");
-        panel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        btnAgregarVenta.setForeground(new java.awt.Color(29, 131, 112));
+        btnAgregarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/carbon--add-filled.png"))); // NOI18N
+        btnAgregarVenta.setText("Agregar    ");
+        btnAgregarVenta.setBorderColor(new java.awt.Color(28, 130, 111));
+        btnAgregarVenta.setBorderEnabled(true);
+        btnAgregarVenta.setColor(new java.awt.Color(242, 252, 250));
+        btnAgregarVenta.setColorOver(new java.awt.Color(194, 241, 232));
+        btnAgregarVenta.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarVenta.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        btnAgregarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnAgregarVenta.setHoverEnabled(true);
+        btnAgregarVenta.setRadius(20);
+        btnAgregarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarVentaActionPerformed(evt);
+            }
+        });
+        panel8.add(btnAgregarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 150, 35));
 
-        jLabel14.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        jLabel14.setText("Nit:");
-        panel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        btnBorrarVenta.setForeground(new java.awt.Color(184, 34, 47));
+        btnBorrarVenta.setText("Borrar");
+        btnBorrarVenta.setBorderColor(new java.awt.Color(184, 34, 47));
+        btnBorrarVenta.setBorderEnabled(true);
+        btnBorrarVenta.setColor(new java.awt.Color(252, 240, 241));
+        btnBorrarVenta.setColorOver(new java.awt.Color(246, 207, 211));
+        btnBorrarVenta.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBorrarVenta.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        btnBorrarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnBorrarVenta.setHoverEnabled(true);
+        btnBorrarVenta.setRadius(20);
+        btnBorrarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarVentaActionPerformed(evt);
+            }
+        });
+        panel8.add(btnBorrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 150, 35));
 
-        jLabel25.setFont(new java.awt.Font("Inria Sans", 0, 16)); // NOI18N
-        jLabel25.setText("Telefono:");
-        panel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        panel4.add(panel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 350, 360));
 
-        panel4.add(panel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 340));
-
-        cardVenta.add(panel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 350, 670));
+        cardVenta.add(panel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 350, 680));
 
         lbNombreEmpresa.setFont(new java.awt.Font("Inria Sans", 0, 18)); // NOI18N
         lbNombreEmpresa.setText("PC Global");
@@ -1995,6 +2005,7 @@ public class HomePage extends javax.swing.JFrame {
     private modelo.Panel panel5;
     private modelo.Panel panel6;
     private modelo.Panel panel7;
+    private modelo.Panel panel8;
     private javax.swing.JLayeredPane panelCard;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JScrollPane spTablaClientes;

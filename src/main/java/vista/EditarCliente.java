@@ -338,7 +338,7 @@ public class EditarCliente extends javax.swing.JDialog {
             public void run() {
                 
                 Cliente clientePrueba = new Cliente();
-                clientePrueba.setIdCliente(1);
+                clientePrueba.setIdCliente(0);
                 clientePrueba.setNombre("Cliente de prueba");
                 clientePrueba.setDpi("1");
                 clientePrueba.setDireccion("Direccion de prueba");
