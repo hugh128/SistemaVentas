@@ -26,15 +26,15 @@ import conexion.VentaDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Date;
-import java.util.Locale;
 import javax.swing.ImageIcon;
 import modelo.Cliente;
 import modelo.CardHome;
 import modelo.Proveedor;
 import modelo.Venta;
+import table.TableActionCellEditorCliente;
 import table.TableActionCellEditorProveedor;
+import table.TableActionEventCliente;
 import table.TableActionEventProveedor;
 
 
@@ -220,6 +220,54 @@ public class HomePage extends javax.swing.JFrame {
         p.setBackground(Color.WHITE);
         spTablaVentas.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         
+        // Tabla Usuarios
+        TableActionEventCliente eventCliente = new TableActionEventCliente() {
+            @Override
+            public void onEditCliente(int row) {
+                System.out.println("Edit row : " + row);
+                Cliente cliente = obtenerClienteDesdeFila(row);
+                EditarCliente editarCliente = new EditarCliente(null, true, cliente);
+                editarCliente.setVisible(true);
+                System.out.println("Cliente editado: " + cliente.getNombre());
+                
+                mostrarClientes();
+            }
+
+            @Override
+            public void onDeleteCliente(int row) {
+                if (row >= 0 && row < tbClientes.getRowCount()) {
+                    System.out.println("Delete row : " + row);
+
+                    if (tbClientes.isEditing()) {
+                        tbClientes.getCellEditor().stopCellEditing();
+                    }
+                    
+                    Cliente cliente = obtenerClienteDesdeFila(row);
+                    int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar al cliente: " + cliente.getNombre() + "?", "Eliminar Cliente", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        clienteDAO.eliminarCliente(cliente);
+                        System.out.println("Cliente eliminado: " + cliente.getNombre());
+
+                        DefaultTableModel model = (DefaultTableModel) tbClientes.getModel();
+                        model.removeRow(row);
+                        int totalRegistros = model.getRowCount();
+                        lbTotalClientes.setText(String.valueOf(totalRegistros));
+                        model.fireTableDataChanged();
+                    }
+                } else {
+                    System.out.println("Indice de fila no valido: " + row);
+                }
+            }
+        };   
+        
+        spTablaClientes.setVerticalScrollBar(new ScrollBar());
+        spTablaClientes.getVerticalScrollBar().setBackground(Color.WHITE);
+        spTablaClientes.getViewport().setBackground(Color.WHITE);
+        p.setBackground(Color.WHITE);
+        spTablaClientes.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        tbClientes.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditorCliente(eventCliente));
+        
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -252,10 +300,13 @@ public class HomePage extends javax.swing.JFrame {
         panel6 = new modelo.Panel();
         txtFiltroClientes = new modelo.MyTextField();
         myButton2 = new modelo.MyButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        clienteTabla = new modelo.ClienteTabla();
+        spTablaClientes = new javax.swing.JScrollPane();
+        tbClientes = new table.TablaClientes();
+        lbTotalClientes = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnAgregarCliente = new modelo.MyButton();
         cardInventario = new javax.swing.JPanel();
         panel3 = new modelo.Panel();
         myTextField1 = new modelo.MyTextField();
@@ -621,42 +672,50 @@ public class HomePage extends javax.swing.JFrame {
                 txtFiltroClientesActionPerformed(evt);
             }
         });
-        panel6.add(txtFiltroClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 300, 35));
+        panel6.add(txtFiltroClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 300, 35));
 
         myButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fe--search (2).png"))); // NOI18N
         myButton2.setBorderColor(new java.awt.Color(128, 128, 128));
         myButton2.setBorderEnabled(true);
         myButton2.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         myButton2.setRadius(10);
-        panel6.add(myButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 50, 35));
+        panel6.add(myButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 20, 50, 35));
 
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        spTablaClientes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
 
-        clienteTabla.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
-        clienteTabla.setModel(new javax.swing.table.DefaultTableModel(
+        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID Cliente", "Nombre", "DPI", "NIT", "Número", "Dirección"
+                "ID", "Nombre", "DPI", "Nit", "Numero", "Direccion", "Acciones"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(clienteTabla);
-        if (clienteTabla.getColumnModel().getColumnCount() > 0) {
-            clienteTabla.getColumnModel().getColumn(5).setResizable(false);
+        spTablaClientes.setViewportView(tbClientes);
+        if (tbClientes.getColumnModel().getColumnCount() > 0) {
+            tbClientes.getColumnModel().getColumn(0).setPreferredWidth(10);
         }
 
-        panel6.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 56, 900, 470));
+        panel6.add(spTablaClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 920, 480));
 
-        cardClientes.add(panel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 940, 600));
+        lbTotalClientes.setFont(new java.awt.Font("Inria Sans", 1, 24)); // NOI18N
+        lbTotalClientes.setForeground(new java.awt.Color(128, 128, 130));
+        lbTotalClientes.setText("0");
+        panel6.add(lbTotalClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        jLabel33.setFont(new java.awt.Font("Inria Sans", 1, 20)); // NOI18N
+        jLabel33.setText("Total de clientes");
+        panel6.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 20, -1, -1));
+
+        cardClientes.add(panel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 950, 580));
 
         jLabel6.setFont(new java.awt.Font("Inria Sans", 1, 24)); // NOI18N
         jLabel6.setText("Clientes");
@@ -665,6 +724,22 @@ public class HomePage extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
         jLabel11.setText("Dasboard / Clientes");
         cardClientes.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        btnAgregarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tdesign--user-add.png"))); // NOI18N
+        btnAgregarCliente.setText("Agregar Cliente");
+        btnAgregarCliente.setColor(new java.awt.Color(44, 134, 72));
+        btnAgregarCliente.setColorOver(new java.awt.Color(34, 104, 56));
+        btnAgregarCliente.setCursorType(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarCliente.setFont(new java.awt.Font("Inria Sans", 0, 14)); // NOI18N
+        btnAgregarCliente.setHoverEnabled(true);
+        btnAgregarCliente.setRadius(10);
+        btnAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarClienteActionPerformed(evt);
+            }
+        });
+        cardClientes.add(btnAgregarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 170, 40));
 
         panelPrincipal.add(cardClientes, "clientes");
 
@@ -1112,7 +1187,7 @@ public class HomePage extends javax.swing.JFrame {
         cardAcercaDe.setBackground(new java.awt.Color(5, 12, 30));
         cardAcercaDe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/61a7d9f46cf1bd257b5a150962f9ffef.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/title.png"))); // NOI18N
         cardAcercaDe.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DEV1.png"))); // NOI18N
@@ -1313,9 +1388,6 @@ public class HomePage extends javax.swing.JFrame {
         agregarUsuario.setVisible(true);
         mostrarUsuarios();
     }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
-    private void txtFiltroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroClientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFiltroClientesActionPerformed
 
     private void btnBorrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarVentaActionPerformed
         tbVentas.clearTable();
@@ -1412,6 +1484,16 @@ public class HomePage extends javax.swing.JFrame {
         lbImpuestos.setText("0.00");
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
+    private void txtFiltroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFiltroClientesActionPerformed
+
+    private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
+        AgregarCliente agregar = new AgregarCliente(this, true);
+        agregar.setVisible(true);
+        mostrarClientes();
+    }//GEN-LAST:event_btnAgregarClienteActionPerformed
+
     public static void main(String args[]) {       
         Usuario usuario = new Usuario();
         usuario.setIdUsuario(0);
@@ -1497,37 +1579,33 @@ public class HomePage extends javax.swing.JFrame {
     
     // Clientes
     public void mostrarClientes() {
-     clienteTabla.clearTable(); // Limpia la tabla antes de agregar datos
-        List<Cliente> clientes = clienteDAO.obtenerClientes(); // Obtiene la lista de clientes desde el DAO
-    
-    for (Cliente cliente : clientes) {
-        clienteTabla.addRow(new Object[]{
-            cliente.getIdCliente(),    // ID del Cliente
-            cliente.getNombre(),       // Nombre del Cliente
-            cliente.getDpi(),          // DPI del Cliente
-            cliente.getNit(),          // NIT del Cliente
-            cliente.getNumero(),       // Número de Teléfono
-            cliente.getDireccion()     // Dirección del Cliente
-        });
+        tbClientes.clearTable();
+        List<Cliente> Clientes = clienteDAO.obtenerClientes();
+        for (Cliente cliente : Clientes) {     
+            tbClientes.addRow(new Object[]{
+                cliente.getIdCliente(),
+                cliente.getNombre(),
+                cliente.getDpi(),
+                cliente.getNit(),
+                cliente.getNumero(),
+                cliente.getDireccion()
+            });
+        }
+        int totalRegistros = Clientes.size();
+        lbTotalClientes.setText(String.valueOf(totalRegistros));
     }
-}
-
-// Método para obtener un cliente desde la fila seleccionada
-    public Cliente obtenerClienteDesdeFila(int row) {
-    int idCliente = Integer.parseInt(clienteTabla.getValueAt(row, 0).toString());
-    String nombre = clienteTabla.getValueAt(row, 1).toString();
-    String dpi = clienteTabla.getValueAt(row, 2).toString();
-    String nit = clienteTabla.getValueAt(row, 3).toString();
-    String numero = clienteTabla.getValueAt(row, 4).toString();
-    String direccion = clienteTabla.getValueAt(row, 5).toString();
     
-    return new Cliente(idCliente, nombre, dpi, nit, numero, direccion);
-}
-
-// Método para limpiar la tabla
-    public void limpiarTablaClientes() {
-    modelo.setRowCount(0); // Asume que modelo es el DefaultTableModel de clienteTabla
-}
+    public Cliente obtenerClienteDesdeFila(int row) {
+        int idCliente = Integer.parseInt(tbClientes.getValueAt(row, 0).toString());
+        String nombreCliente = tbClientes.getValueAt(row, 1).toString();
+        String dpi = tbClientes.getValueAt(row, 2).toString();
+        String nit = tbClientes.getValueAt(row, 3).toString();
+        String numero = tbClientes.getValueAt(row, 4).toString();
+        String direccion = tbClientes.getValueAt(row, 5).toString();
+        
+        return new Cliente(idCliente, nombreCliente, dpi, nit, numero, direccion);
+    }
+    
     // Proveedores
     public void mostrarProveedores() {
         tbProveedores.clearTable();
@@ -1687,6 +1765,7 @@ public class HomePage extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private modelo.GradientButton btnAcercaDe;
+    private modelo.MyButton btnAgregarCliente;
     private modelo.Button btnAgregarProducto;
     private modelo.Button btnAgregarProveedor;
     private modelo.MyButton btnAgregarVenta;
@@ -1713,7 +1792,6 @@ public class HomePage extends javax.swing.JFrame {
     private modelo.Combobox cbClientes;
     private modelo.Combobox cbProductos;
     private chartModel.Chart chart2;
-    private modelo.ClienteTabla clienteTabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1738,6 +1816,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1749,7 +1828,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbCliente;
     private javax.swing.JLabel lbDireccionCliente;
     private javax.swing.JLabel lbDireccionEmpresa;
@@ -1775,6 +1853,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel lbSubTotal;
     private javax.swing.JLabel lbTelCliente;
     private javax.swing.JLabel lbTelEmpresa;
+    private javax.swing.JLabel lbTotalClientes;
     private javax.swing.JLabel lbTotalProductos;
     private javax.swing.JLabel lbTotalProveedores;
     private javax.swing.JLabel lbTotalUsuarios;
@@ -1793,11 +1872,13 @@ public class HomePage extends javax.swing.JFrame {
     private modelo.Panel panel7;
     private javax.swing.JLayeredPane panelCard;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JScrollPane spTablaClientes;
     private javax.swing.JScrollPane spTablaProveedores;
     private javax.swing.JScrollPane spTablaUsuarios;
     private javax.swing.JScrollPane spTablaVentas;
     private javax.swing.JScrollPane spTable;
     private table.Table tablaInventario;
+    private table.TablaClientes tbClientes;
     private table.TablaProveedores tbProveedores;
     private table.TablaUsuarios tbUsuarios;
     private table.TablaVentas tbVentas;

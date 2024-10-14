@@ -606,7 +606,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="110" width="940" height="600"/>
+                      <AbsoluteConstraints x="0" y="110" width="950" height="580"/>
                     </Constraint>
                   </Constraints>
 
@@ -634,7 +634,7 @@
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="500" y="10" width="300" height="35"/>
+                          <AbsoluteConstraints x="550" y="20" width="300" height="35"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -654,11 +654,11 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="820" y="10" width="50" height="35"/>
+                          <AbsoluteConstraints x="860" y="20" width="50" height="35"/>
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                    <Container class="javax.swing.JScrollPane" name="spTablaClientes">
                       <Properties>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -671,32 +671,28 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="20" y="56" width="900" height="470"/>
+                          <AbsoluteConstraints x="20" y="60" width="920" height="480"/>
                         </Constraint>
                       </Constraints>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="modelo.ClienteTabla" name="clienteTabla">
+                        <Component class="table.TablaClientes" name="tbClientes">
                           <Properties>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                                <LineBorder thickness="0"/>
-                              </Border>
-                            </Property>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="6" rowCount="0">
-                                <Column editable="false" title="ID Cliente" type="java.lang.Object"/>
+                              <Table columnCount="7" rowCount="0">
+                                <Column editable="false" title="ID" type="java.lang.Object"/>
                                 <Column editable="false" title="Nombre" type="java.lang.Object"/>
                                 <Column editable="false" title="DPI" type="java.lang.Object"/>
-                                <Column editable="false" title="NIT" type="java.lang.Object"/>
-                                <Column editable="false" title="N&#xfa;mero" type="java.lang.Object"/>
-                                <Column editable="false" title="Direcci&#xf3;n" type="java.lang.Object"/>
+                                <Column editable="false" title="Nit" type="java.lang.Object"/>
+                                <Column editable="false" title="Numero" type="java.lang.Object"/>
+                                <Column editable="false" title="Direccion" type="java.lang.Object"/>
+                                <Column editable="true" title="Acciones" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                               <TableColumnModel selectionModel="0">
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="10" resizable="true">
                                   <Title/>
                                   <Editor/>
                                   <Renderer/>
@@ -721,7 +717,12 @@
                                   <Editor/>
                                   <Renderer/>
                                 </Column>
-                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                  <Title/>
+                                  <Editor/>
+                                  <Renderer/>
+                                </Column>
+                                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                   <Title/>
                                   <Editor/>
                                   <Renderer/>
@@ -735,6 +736,35 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JLabel" name="lbTotalClientes">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Inria Sans" size="24" style="1"/>
+                        </Property>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="82" green="80" red="80" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="0"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="180" y="20" width="-1" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel33">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Inria Sans" size="20" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Total de clientes"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="21" y="20" width="-1" height="-1"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel6">
@@ -760,6 +790,39 @@
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="20" y="60" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="modelo.MyButton" name="btnAgregarCliente">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/tdesign--user-add.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Agregar Cliente"/>
+                    <Property name="color" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="48" green="86" red="2c" type="rgb"/>
+                    </Property>
+                    <Property name="colorOver" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="38" green="68" red="22" type="rgb"/>
+                    </Property>
+                    <Property name="cursorType" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Inria Sans" size="14" style="0"/>
+                    </Property>
+                    <Property name="hoverEnabled" type="boolean" value="true"/>
+                    <Property name="radius" type="int" value="10"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarClienteActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="730" y="40" width="170" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -2042,7 +2105,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/61a7d9f46cf1bd257b5a150962f9ffef.png"/>
+                      <Image iconType="3" name="/images/title.png"/>
                     </Property>
                   </Properties>
                   <Constraints>
