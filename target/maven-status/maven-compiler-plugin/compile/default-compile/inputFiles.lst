@@ -12,6 +12,7 @@ C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\conexion\ClienteD
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\conexion\ProductoDAO.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\conexion\ProveedorDAO.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\conexion\UsuarioDAO.java
+C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\conexion\VentaDAO.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\BaseDatos.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Button.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\CardHome.java
@@ -20,7 +21,6 @@ C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\ClienteTab
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Combobox.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\GradientButton.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\MyButton.java
-C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\MyComboBox.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\MyPasswordField.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\MyTextField.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Panel.java
@@ -29,6 +29,7 @@ C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Producto.j
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Proveedor.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\TextField.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Usuario.java
+C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\modelo\Venta.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\sistemaventas\SistemaVentas.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\Action.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\ActionProveedor.java
@@ -41,6 +42,7 @@ C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\ScrollBar.j
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\StatusType.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TablaProveedores.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TablaUsuarios.java
+C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TablaVentas.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\Table.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableActionCellEditor.java
 C:\Users\hugh1\Documents\Proyectos\SistemaVentas\src\main\java\table\TableActionCellEditorProveedor.java

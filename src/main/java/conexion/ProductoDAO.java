@@ -124,7 +124,29 @@ public class ProductoDAO {
         }*/
         return listaProductos;
     }
-    
+   
+    // Actualiza Stock inventario
+    public boolean actualizarStockProducto(int idProducto, int cantidadVendida) {
+        String sql = "UPDATE productos SET cantidad = cantidad - ? WHERE idProducto = ? AND cantidad >= ?";
+        try {
+            if (conexion != null) {
+                try (PreparedStatement st = conexion.prepareStatement(sql)) {
+                    st.setInt(1, cantidadVendida);
+                    st.setInt(2, idProducto);
+                    st.setInt(3, cantidadVendida);
+                    return st.executeUpdate() > 0;
+                }
+            } else {
+                System.out.println("Error: No se pudo establecer la conexión a la base de datos.");
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar el stock del producto: " + ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     // Cerrar conexion
     private void cerrarConexion() {
         if (conexion != null) {
