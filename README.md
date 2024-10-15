@@ -14,30 +14,30 @@ Este es un proyecto universitario desarrollado en Java que consiste en un sistem
 
 ## Screenshots
 Login
-![(/Screenshots/Login.png)]
+![](/Screenshots/Login.png)
 
 Home
-![(/Screenshots/Home.png)]
+![](/Screenshots/Home.png)
 
 Clientes
-![(/Screenshots/Clientes.png)]
+![](/Screenshots/Clientes.png)
 
 Inventario
-![(/Screenshots/Inventario.png)]
+![](/Screenshots/Inventario.png)
 
 Proveedores
-![(/Screenshots/Proveedores.png)]
+![](/Screenshots/Proveedores.png)
 
 Venta
-![(/Screenshots/Venta.png)]
-![(/Screenshots/VentaRealizada.png)]
-![(/Screenshots/FacturaVenta#40-1.png)]
+![](/Screenshots/Venta.png)
+![](/Screenshots/VentaRealizada.png)
+![](/Screenshots/FacturaVenta#40-1.png)
 
 Usuarios
-![(/Screenshots/Usuarios.png)]
+![](/Screenshots/Usuarios.png)
 
 Acerca De
-![(/Screenshots/AcercaDe.png)]
+![](/Screenshots/AcercaDe.png)
 
 ## Tecnologías Utilizadas
 
