@@ -12,11 +12,43 @@ Este es un proyecto universitario desarrollado en Java que consiste en un sistem
 - **Ventana de Login**: Pantalla inicial para el inicio de sesión de usuarios.
 - **Base de Datos**: Almacena toda la información relevante del sistema, como productos, clientes, proveedores, ventas y usuarios.
 
+## Screenshots
+Login
+![(/Screenshots/Login.png)]
+
+Home
+![(/Screenshots/Home.png)]
+
+Clientes
+![(/Screenshots/Clientes.png)]
+
+Inventario
+![(/Screenshots/Inventario.png)]
+
+Proveedores
+![(/Screenshots/Proveedores.png)]
+
+Venta
+![(/Screenshots/Venta.png)]
+![(/Screenshots/VentaRealizada.png)]
+![(/Screenshots/FacturaVenta#40-1.png)]
+
+Usuarios
+![(/Screenshots/Usuarios.png)]
+
+Acerca De
+![(/Screenshots/AcercaDe.png)]
+
 ## Tecnologías Utilizadas
 
 - **Lenguaje**: Java
 - **IDE**: NetBeans
 - **Base de Datos**: MySQL
+
+## Autores
+
+- Pablo Cobon 2690-23-18351
+- Hugo Ordoñez 2690-23-10929 
 
 ## Licencia
 
