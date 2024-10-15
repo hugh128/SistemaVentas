@@ -45,9 +45,11 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class HomePage extends javax.swing.JFrame {
@@ -1434,10 +1436,11 @@ public class HomePage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingresa una cantidad", "Cantidad no ingresada", JOptionPane.WARNING_MESSAGE);  
             return;
         }else if(Integer.parseInt(txtCantidadVenta.getText()) > productoSeleccionado.getCantidad()){
-            JOptionPane.showMessageDialog(null, "No hay stock suficiente de: " + productoSeleccionado.getNombre(), "Stock insuficiente",JOptionPane.WARNING_MESSAGE);  
+            JOptionPane.showMessageDialog(null, "No hay stock suficiente de: " + productoSeleccionado.getNombre(), "Stock insuficiente",JOptionPane.WARNING_MESSAGE);
+            return;
         } else {
             for(int i = 0; i < tbVentas.getRowCount(); i++) {
-                if(tbVentas.getValueAt(i, 0).equals(productoSeleccionado.getNombre())) {
+                if(tbVentas.getValueAt(i, 1).equals(productoSeleccionado.getNombre())) {
                     System.out.println(tbVentas.getValueAt(i, 0));
                     JOptionPane.showMessageDialog(null, "El Producto ya fue agregado", "Producto agregado", JOptionPane.WARNING_MESSAGE);
                     return;
@@ -1788,30 +1791,22 @@ public class HomePage extends javax.swing.JFrame {
     }
     
     // Facturas
-
     public void generarReportePDF(String rutaArchivo) {
         Document document = new Document();
 
         try {
             PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo));
-
-            // Abrir el documento
             document.open();
 
-            // Crear una fuente en negrita y más grande para el título
             Font fontTitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 20, BaseColor.BLACK);
             Font fontSubTitulo = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
 
-            // Crear el título "Factura de Ventas" centrado
             Paragraph titulo = new Paragraph("Factura de Ventas", fontTitulo);
             titulo.setAlignment(Element.ALIGN_CENTER);
             document.add(titulo);
             document.add(new Paragraph("\n"));
-
-            // Crear una fuente para los datos de la empresa
             Font fontDatos = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
 
-            // Crear el párrafo con los datos de la empresa
             Paragraph datosEmpresa = new Paragraph("PC Global\n2 av Zona 1 La Esperanza Quetzaltenango\nNit: 89034640\nTel: 7737-4893", fontDatos);
             datosEmpresa.setAlignment(Element.ALIGN_CENTER);
             document.add(datosEmpresa);
@@ -1821,11 +1816,8 @@ public class HomePage extends javax.swing.JFrame {
             Paragraph subTitulo = new Paragraph(fecha + "\n" + "Factura Numero: " + lbNoFactura.getText(), fontSubTitulo);
             subTitulo.setAlignment(Element.ALIGN_CENTER);
             document.add(subTitulo);
-
-            // Saltar otra línea
             document.add(new Paragraph("\n\n"));
             
-            // Crear el párrafo con los datos del cliente
             Font fontDatosCliente = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.BLACK);
             Paragraph tituloClientes = new Paragraph("Datos del Cliente", fontDatosCliente);
             titulo.setAlignment(Element.ALIGN_CENTER);
@@ -1839,16 +1831,13 @@ public class HomePage extends javax.swing.JFrame {
             Paragraph datosCliente = new Paragraph("Nombre: " + nombreCliente + "\n" + "Nit: " + nitCliente + "\n" + "Telefono: " + telCliente + "\n" + "Direccion: " + direccionCliente, fontDatos);
             datosEmpresa.setAlignment(Element.ALIGN_RIGHT);
             document.add(datosCliente);
-
-            // Saltar otra línea
             document.add(new Paragraph("\n\n"));
-            
             
             // Crear una tabla de productos            
             PdfPTable table = new PdfPTable(5);
-            table.setWidthPercentage(100); // Ajustar la tabla al 100% del ancho del documento
-            table.setSpacingBefore(0f); // Sin espacio antes de la tabla
-            table.setSpacingAfter(0f); // Sin espacio después de la tabla
+            table.setWidthPercentage(100);
+            table.setSpacingBefore(0f);
+            table.setSpacingAfter(0f);
             float[] columnWidths = {1f, 8f, 2f, 2f, 2f};
             table.setWidths(columnWidths);
             table.addCell("ID");
@@ -1864,12 +1853,10 @@ public class HomePage extends javax.swing.JFrame {
                 table.addCell(String.valueOf((float)tbVentas.getValueAt(i, 3)));
                 table.addCell(String.valueOf((float)tbVentas.getValueAt(i, 4)));
                 
-            }
-            
+            }            
             document.add(table);
             document.add(new Paragraph("\n"));
             
-            // Agrega Total Factura
             String totatVenta = lbTotalVenta.getText();
             Font fontTotal = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.BLACK);
             Paragraph total = new Paragraph("Total a pagar: Q." + totatVenta, fontTotal);
@@ -1877,19 +1864,32 @@ public class HomePage extends javax.swing.JFrame {
             document.add(total);
             document.add(new Paragraph("\n\n\n"));
             
-            
-            
-            // Agregar mensaje final
             String guiones = "--------------------------------------";
             String msg = "Gracias por su compra";
             Font fontMsg = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
             Paragraph msgFinal = new Paragraph(guiones + "\n" + msg, fontMsg);
             msgFinal.setAlignment(Element.ALIGN_CENTER);
             document.add(msgFinal);
-            
-            
+                      
             document.close();
             System.out.println("Factura creada exitosamente!");
+            
+            // Abrir el archivo PDF automáticamente
+            File archivoPDF = new File(rutaArchivo);
+            if (archivoPDF.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().open(archivoPDF);
+                    } catch (IOException e) {
+                        System.out.println("Error al intentar abrir el archivo PDF.");
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("El sistema no soporta abrir archivos automáticamente.");
+                }
+            } else {
+                System.out.println("El archivo PDF no se pudo encontrar.");
+            }            
 
         } catch (FileNotFoundException | DocumentException e) {
             e.printStackTrace();
